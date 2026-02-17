@@ -1,6 +1,6 @@
 ---
 name: xlab-brand
-description: Apply XLAB brand identity to any deliverable — presentations (PPTX), documents (DOCX), HTML pages, artifacts, social media graphics, or any visual output. Use this skill whenever the user mentions XLAB, asks for brand-consistent materials, wants to create a presentation/document/page for XLAB, or references XLAB's visual identity. Also trigger when the user says "apply the XLAB theme", "make it on-brand", "use our brand", or asks for event proposals, pitch decks, capabilities presentations, or any client-facing materials for XLAB.
+description: Apply XLAB brand identity to presentations, documents, HTML, artifacts, and visual outputs. Trigger for any XLAB-branded materials including proposals, pitch decks, and client-facing content.
 ---
 
 # XLAB Brand Skill
@@ -21,7 +21,7 @@ Trigger this skill for any output that should carry the XLAB brand: slides, docu
 | XLAB White | `#F8F7F2` | Primary text, logo |
 | Neon Greenish Yellow | `#E3E829` | Accent only — headings, icons, buttons, overlines |
 | Mid Gray | `#4a4a4a` | Captions, dividers |
-| Dark Gray | `#1a1a1a` | Secondary dark background |
+| Dark Gray | `#1a1a1a` | Secondary dark background, card fills |
 
 **Yellow rules**: Use for headings, icons, buttons, light beam elements, overlines. Never as a background fill or gradient. **Never use yellow for text on white or light backgrounds** — yellow text lacks contrast and is poorly readable on light surfaces. Use XLAB Black for text on light backgrounds instead. Yellow decorative elements (lines, icons, accents) are fine on any background.
 
@@ -43,18 +43,18 @@ Headlines are always uppercase.
 
 The XLAB "X" symbol is formed by four triangular light beams.
 
-**IMPORTANT — Aspect ratio:** The X symbol is a landscape rectangle, NOT a square. Original pixel dimensions are 1056 × 662 px (aspect ratio approximately 1.6 : 1). Always maintain this ratio when embedding. Never stretch or compress the symbol into a square.
+**IMPORTANT — Aspect ratio:** The X symbol is a landscape rectangle, NOT a square. Aspect ratio is approximately 1.6 : 1. Always maintain this ratio when embedding. Never stretch or compress the symbol into a square.
 
 #### Assets (local — bundled with this skill)
 
-All brand assets are stored in the `assets/` directory relative to this skill file.
+All brand assets are stored in the `assets/` directory relative to this skill file. All assets are **PNG with transparent background (RGBA)** — they work correctly on any background color.
 
-| Asset | File | Dimensions | Use case |
-|-------|------|-----------|----------|
-| X symbol (white) | `assets/x_symbol_white.png` | 1056×662 px | On black/dark backgrounds |
-| X symbol (black) | `assets/x_symbol_black.png` | 1056×662 px | On white/light backgrounds |
-| XLAB logo (white) | `assets/x_logo_white.png` | 1398×248 px | Full XLAB logo, dark backgrounds |
-| XLAB logo (black) | `assets/x_logo_black.png` | 1398×248 px | Full XLAB logo, light backgrounds |
+| Asset | File | Native size | Aspect ratio | Use case |
+|-------|------|-------------|--------------|----------|
+| X symbol (white) | `assets/x_symbol_white.png` | 2683×1700 px | ~1.6:1 | On black/dark backgrounds |
+| X symbol (black) | `assets/x_symbol_black.png` | 2685×1700 px | ~1.6:1 | On white/light backgrounds |
+| XLAB logo (white) | `assets/x_logo_white.png` | 4618×824 px | ~5.6:1 | Full XLAB wordmark, dark backgrounds |
+| XLAB logo (black) | `assets/x_logo_black.png` | 4621×824 px | ~5.6:1 | Full XLAB wordmark, light backgrounds |
 
 **How to access assets in code:**
 
@@ -97,7 +97,7 @@ with open(x_symbol_white, "rb") as f:
 - Medium: w: 0.48", h: 0.30"
 - Large: w: 0.80", h: 0.50"
 
-- **PPTX**: Copy the PNG from the skill assets directory, then use `slide.addImage({ path: "<local_path>", x: 9.35, y: 5.1, w: 0.30, h: 0.19 })` for a small bottom-right placement on a 16:9 slide
+- **PPTX**: Copy the PNG from the skill assets directory, then use `slide.addImage({ path: "<local_path>", x: 9.35, y: 5.1, w: 0.30, h: 0.19 })` for a small bottom-right placement on a 10"×5.63" slide (pptxgenjs default)
 - **HTML**: Read the asset file, convert to base64, and embed as `<img src="data:image/png;base64,..." style="aspect-ratio: 1056/662;">`
 - Do not attempt to recreate the symbol with SVG — always use the provided PNG assets
 - **Never set equal width and height** — the symbol is a rectangle, not a square
@@ -108,12 +108,16 @@ with open(x_symbol_white, "rb") as f:
 
 Key points:
 - Black background slides with white text as default
-- Yellow for overlines, key numbers, accent text
+- Yellow (#E3E829) for overlines, key numbers, accent text
+- Gray (#888888) for secondary/body text
 - X symbol bottom-right on every slide **except the cover/title slide**
 - Page number bottom-left on every slide
 - Footer area: page number (left), X symbol (right) — keep minimal, no full-width bars
 - Centered composition for title/cover slides
-- Two-column layouts for content slides (text left, images right)
+
+Content slide header pattern (consistent across all content slides):
+- **Overline**: small text (10pt), bold, yellow (#E3E829), UPPERCASE — category/section name
+- **Title**: large text (32pt), bold, white (#F8F7F2) — slide title
 
 ### Social Media
 
@@ -160,4 +164,4 @@ XLAB's voice is calm, professional, and human. No superlatives, no marketing hyp
 
 ## Asset References
 
-All brand assets are bundled locally in the `assets/` subdirectory of this skill. No external dependencies or network access required.
+All brand assets are bundled locally in the `assets/` subdirectory of this skill. No external dependencies or network access required. All assets are PNG with alpha transparency — they render correctly on any background color without artifacts.
