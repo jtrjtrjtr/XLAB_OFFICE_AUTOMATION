@@ -16,7 +16,12 @@ This skill requires two other skills to be active:
 
 ## When to Use
 
-Trigger when the user asks for a proposal, pitch deck, nabídka, offer, or client-facing presentation for a specific XLAB project. The user will typically provide project details, scope, pricing, and timeline.
+Trigger when the user asks for a **proposal, pitch deck, nabídka, or offer** for a specific XLAB client project. The user will typically provide project details, scope, pricing, and timeline.
+
+**Skill routing:**
+- XLAB proposal/nabídka → **this skill** (xlab-proposal)
+- XLAB interní/branded prezentace (ne proposal) → `xlab-pptx-template` skill
+- Obecná prezentace bez XLAB brandingu → public `pptx` skill
 
 ## Workflow Overview (Cesta C)
 
@@ -24,11 +29,12 @@ The proposal is built by merging template slides with generated content:
 
 ```
 1. Extract assets from xlab-brand skill
-2. Create cover slide from XLAB_PPT_ALL template (Layout 1)
-3. Create closing slide from XLAB_PPT_ALL template (Layout 15)
-4. Generate content slides with pptxgenjs
-5. Merge: cover + content + closing → final PPTX
+2. Build shell: cover (Layout 1) + closing (Layout 15) from XLAB_PPT_ALL template
+3. Generate ONLY content slides with pptxgenjs — NO cover, NO closing
+4. Merge: cover + content + closing → final PPTX
 ```
+
+**⚠️ Kritické pravidlo:** pptxgenjs generuje POUZE content slidy (od slide 2 do předposledního). Cover a closing NIKDY negeneruje pptxgenjs — vždy se berou z template shellu. Porušení způsobí duplicitní slidy po mergi.
 
 ## Step-by-Step
 
@@ -65,6 +71,8 @@ Edit closing slide text: update contact details if needed.
 
 ### Step 3: Generate Content Slides with pptxgenjs
 
+**⚠️ pptxgenjs generuje POUZE content slidy — NIKDY ne cover ani closing slide. Ty přidá merge z template shellu.**
+
 Create a Node.js script that generates content slides. Use the component library below.
 
 **Critical settings:**
@@ -80,18 +88,23 @@ pptx.layout = "XLAB";
 
 ### Step 4: Merge Shell + Content
 
-```bash
-# Unpack both
-python /mnt/skills/public/pptx/scripts/office/unpack.py /tmp/shell.pptx /tmp/shell-unpacked/
-python /mnt/skills/public/pptx/scripts/office/unpack.py /tmp/content.pptx /tmp/content-unpacked/
+Použij připravený merge script:
 
-# Copy content slides into shell (after cover, before closing)
-# Use add_slide.py or manual XML merge
-# Then clean and pack
-python /mnt/skills/public/pptx/scripts/clean.py /tmp/merged-unpacked/
-python /mnt/skills/public/pptx/scripts/office/pack.py /tmp/merged-unpacked/ /home/claude/proposal.pptx \
-  --original /tmp/shell.pptx
+```bash
+python3 /mnt/skills/user/xlab-proposal/scripts/merge_proposal.py \
+  /tmp/shell.pptx \
+  /tmp/content.pptx \
+  /home/claude/proposal.pptx
 ```
+
+Script automaticky:
+- Injektuje čistý blank layout (`slideLayout31.xml`) do shell PPTX — **zabraňuje layout contamination** (bez toho by se dekorativní prvky Cover layoutu, X ray grafika a zelená linie, propsaly do content slidů)
+- Přepíše layout reference content slidů z pptxgenjs na blank layout místo slideLayout1
+- Vezme cover (slide 1) ze shell.pptx
+- Vloží všechny slidy z content.pptx
+- Přidá closing (poslední slide) ze shell.pptx
+- Zkopíruje media soubory a aktualizuje relationships
+- Odstraní nebo zkopíruje notesSlide reference (pptxgenjs je generuje, ale soubory nemusí existovat)
 
 Copy final output:
 ```bash
