@@ -172,9 +172,81 @@ Content slide header pattern (consistent across all content slides):
 
 ### Documents (DOCX, PDF)
 
-- X symbol top-left (small, subtle) on letterhead
-- XLAB logo + contact info at bottom
-- Yellow accent for headings and horizontal rules
+XLAB Word documents use a white background with dark text and yellow accents. The document style is clean and structured — it is NOT the same as the PPTX design (which uses dark backgrounds).
+
+#### Page Setup (A4)
+
+```javascript
+const PAGE = {
+  width: 11906,        // A4
+  height: 16838,
+  marginTop: 1800,     // 1.25"
+  marginBottom: 1440,  // 1"
+  marginLeft: 1440,    // 1"
+  marginRight: 1440,   // 1"
+};
+// contentWidth = 9026 DXA
+```
+
+#### Cover Page
+
+- XLAB logo (black variant, ~200×36px) centered or left-aligned, upper third of page
+- Yellow horizontal rule below logo (BorderStyle.SINGLE, size 8, color E3E829)
+- Document title: Arial Bold, 22pt, color #1a1a1a, UPPERCASE
+- Subtitle: Arial, 13pt, color #4a4a4a
+- Client name: Arial, 11pt, color #888888
+- Date: Arial, 10pt, color #888888, lower area
+- No header/footer on cover page (separate section)
+
+#### Content Pages — Header
+
+- X symbol (black variant, ~24×15px) top-left corner
+- Nothing else in header — keep minimal
+
+#### Content Pages — Footer
+
+- Thin gray line on top (BorderStyle.SINGLE, size 2, color CCCCCC)
+- Left: **XLAB logo (black wordmark)** as ImageRun (~80×14px) — NOT text. Use `x_logo_black.png` from brand assets.
+- Right (tab stop): page number — Arial 8pt, color #888888
+
+#### Typography
+
+| Element | Font | Size | Color | Style |
+|---------|------|------|-------|-------|
+| H1 (section) | Arial | 14pt | #1a1a1a | Bold, UPPERCASE |
+| H2 (subsection) | Arial | 12pt | #4a4a4a | Bold |
+| Body text | Arial | 10.5pt | #4a4a4a | Normal |
+| Captions/labels | Arial | 10pt | #666666 | Normal |
+
+#### Yellow Accent Elements
+
+- **Section divider**: yellow horizontal rule under each H1 (border-bottom, size 6, color E3E829)
+- **Highlight box**: table with yellow left border (size 8, color E3E829), warm gray background (#F2F1EC), used for specs and key info
+- **Checklist items**: paragraph with yellow left border (size 8, color E3E829), bold title + indented description
+- **Pricing total line**: yellow top border on total row (size 4, color E3E829)
+
+#### Pricing Table Style
+
+- Full-width table, two columns (item name left, price right-aligned)
+- No vertical borders, subtle gray horizontal dividers (size 1, color CCCCCC)
+- Total row: yellow top border, bold text, larger font (12pt)
+- Prices always bold, color #1a1a1a
+
+#### Color Palette (DOCX-specific)
+
+| Role | Color |
+|------|-------|
+| Background | white (default) |
+| Primary text / titles | #1a1a1a |
+| Body text | #4a4a4a |
+| Secondary text | #666666 |
+| Subtle text (dates, captions) | #888888 |
+| Decorative accents | #E3E829 (yellow) |
+| Table/footer lines | #CCCCCC |
+| Highlight box background | #F2F1EC |
+| X symbol / Logo | black variants |
+
+**Key difference from PPTX:** Documents always use light background. Yellow is for decorative elements (rules, borders) — never for text. All text uses grayscale palette.
 
 ### HTML / Artifacts
 

@@ -1,6 +1,6 @@
 ---
 name: xlab-pricing
-description: Generate XLAB event pricing calculations. Two modes — Standard (reads bundled ceník XLSX) and Freeform (custom prices without ceník). Outputs branded Excel with Kalkulace + Summary sheets. Use when user asks for kalkulace, cenová nabídka, pricing, cost estimate, or budget.
+description: Generate XLAB pricing calculations for events, installations, and creative projects. Two modes — Standard (reads bundled ceník XLSX) and Freeform (custom prices without ceník). Supports event pricing, permanent installation pricing (with backup components), and content/creative project pricing (set-based). Outputs branded Excel with Kalkulace + Summary sheets. Use when user asks for kalkulace, cenová nabídka, pricing, cost estimate, or budget.
 ---
 
 # XLAB Pricing Skill
@@ -13,6 +13,8 @@ Trigger when the user asks for:
 - **kalkulace**, **cenová kalkulace**, **pricing**, **cost estimate**, **budget**
 - **kolik by stálo...**, **nacenit**, **připravit ceny**
 - Any request to price an XLAB event, conference, activation, or project
+- **instalace**, **stálá instalace**, **permanent installation** — triggers Rule P3 (backup components)
+- **kreativní projekt**, **content production**, **výroba obsahu** — triggers Rule P1 (set-based pricing)
 
 **Skill routing:**
 - Pricing/kalkulace → **this skill** (xlab-pricing)
@@ -48,6 +50,37 @@ In freeform mode, every item must include `unit_price_sell` (and optionally `uni
   ]
 }
 ```
+
+## Project-Type Calculations (Instalace, kreativní projekty)
+
+Standard and Freeform modes cover event pricing. For **project-type work** (permanent installations, creative/content production — e.g. Bachledka), additional rules apply:
+
+### Rule P1: Výroba obsahu / Intelektuální práce
+
+For creative and production work (content creation, concept development, creative direction, motion design, brain development), do **not** use the "Dní" column with actual day counts. Instead:
+- Column G (Dní) → use label **"Set / celek"** with default value **1** as a placeholder
+- This prevents the client from reading "15 days × rate = X CZK" as a binding commitment
+- The value 1 is updated manually when the scope is finalized
+
+**When to apply:** Any item where the deliverable is intellectual/creative output (not physical presence on-site). Typical categories: creative design, content production, AI brain development, concept & strategy.
+
+### Rule P2: Popisný řádek pod variantami
+
+When a calculation includes variant columns (Ekonomická / Standard / Prémiová), there **must** be a descriptive row below the variant section:
+- Fill: CHARCOAL (#333333) background, white text
+- Content: Explains the **operational impact** of each variant — not just price difference
+- Format: "Ekonomická (X EUR/ks): vhodná pro … | Standard (Y EUR/ks): doporučená volba … | Prémiová (Z EUR/ks): maximální rezerva pro …"
+
+This row is mandatory whenever variants appear. It helps the client understand what they're choosing between.
+
+### Rule P3: Záložní komponenty pro stálé instalace
+
+If the project is a **permanent installation** (not a one-off event), automatically include backup/redundancy hardware as a standalone line item:
+- Backup media server, backup player, or equivalent — depending on the tech stack
+- Listed as a separate row with its own price, **not** as an optional add-on
+- Category: same as the primary hardware (e.g. under Technika)
+
+**When NOT to apply:** Single-day or multi-day events where equipment is returned after the event. Backup components are only relevant for installations that run unattended.
 
 ## Architecture
 
@@ -93,16 +126,18 @@ Extract from user's description:
 
 | Parameter | Example | Default |
 |-----------|---------|---------|
-| **Event type** | konference, gala, aktivace | — (required) |
+| **Event type** | konference, gala, aktivace, instalace | — (required) |
+| **Project type** | event (jednorázová akce), installation (stálá instalace), content (kreativní produkce) | event |
 | **Duration** | 1 den, 2 dny | 1 den |
 | **Tier** | standard, snížená, premium | Standard |
 | **Scale** | 50 lidí, velká | infer from type |
-| **Special needs** | streaming, LED, avatar | none |
+| **Special needs** | streaming, LED, avatar, holobox | none |
 | **Client** | VISA, Coca Cola | — (ask) |
 | **Event name** | Winter Meeting 2026 | — (ask) |
 | **Job Nr.** | 2026-042 | — (ask) |
 | **Date** | 15.3.2026 | today |
 | **Freeform?** | bez ceníku, vlastní ceny | false |
+| **Variants?** | ekonomická/standard/prémiová | no (single tier) |
 
 ### Step 2: Select Template & Items (Standard Mode)
 
@@ -111,11 +146,13 @@ Match event to closest **Alokační šablona**:
 | Template | Keywords |
 |----------|----------|
 | Press Conference | tiskovka, TK, press |
+| Menší event — ozvučení & nasvícení | vernisáž, menší akce, nasvícení, ozvučení, světlo + zvuk |
 | Střední Event | event, akce, středně velká |
 | Gala / Winter Meeting | gala, večírek, ples |
 | Mezinárodní aktivace | F1, international, aktivace |
 | Konference (Ventuz) | konference, conference, Ventuz |
-| HoloboX | holobox, hologram, avatar |
+| Holobox Event | holobox, hologram, holobox rental |
+| AI Avatar Rental | avatar, avatar pronájem, digitální člověk (bez holoboxu) |
 | Dealer Meeting | dealer meeting, full service |
 
 ### Step 3: Build Item List
@@ -270,13 +307,56 @@ Assets (logos) are auto-detected from `SKILL_DIR/assets/`.
 - Large multi-screen → **3D Media Server 4×4K + režie** (85k)
 
 ### Operators
-- Without 3D Media Server → **Video Operator** (1 100/h)
+- Without 3D Media Server → **Video Operator** (950/h)
 - With 3D Media Server → **3D Media Server Operator** (1 250/h)
+- Lighting → **Light Designer** (900/h)
+- Sound → **Sound Operator** (900/h)
 
 ### LED Screens
 - Small → **LED 3×2,5 m** (20k)
 - Medium → **LED 5×3 m** (30k)
 - Large → **LED 8×3 m** (40k)
+
+### Osvětlení
+- Plošné / akcentní nasvícení → **LED PAR 100W** (550/ks/den) — specify quantity by use: "ambient (24 ks)" vs "akcent (6 ks)"
+- Směrové nasvícení objektů / osob → **Profilový reflektor** (900/ks/den)
+- Řízení světel → **Světelný pult + show control** (1 900/set/den)
+
+### Zvuk
+- Ozvučení sálu → **PA systém** (17 500/set/den)
+- Digitální mix → **Mixážní pult** (1 900/set/den)
+- Statický mikrofon → **Mikrofonní stojka** (1 300/ks/den)
+- Bezdrátový mikrofon → **Bezdrátový mikrofon — handka** (2 250/ks/den)
+
+### Kabeláž
+- Vždy přidat **Kabeláž + spojovací materiál** (5 000/set) — platí pro každou akci s vlastní technikou. Rozsah dle velikosti akce (snížená 4k–6k).
+
+### Holobox & Avatar — CRITICAL: Always Two Separate Items
+
+Holobox (hardware) and Avatar (AI/digital human) are **two distinct products** with separate prices. Never merge them into a single line item.
+
+When the brief includes avatar + holobox, create **two rows**:
+1. **Holobox — pronájem jednotky** (hardware rental: the physical display unit, transport, installation) — Std **20 000**/set/den
+2. **AI Avatar — licence a nastavení** (the digital human: appearance, voice, brain configuration) — Std **10 000**/set/den
+
+These go into a shared category section (e.g. "AVATAR & HOLOBOX"), but each has its own row, unit price, and quantity.
+
+Additionally, avatar brain work (Brain Development, Brain Customization) belongs in a separate category "AI & AVATAR KONFIGURACE" — this is creative/intellectual work, not hardware.
+
+**Holobox Event** requires significantly more Stage Hands than Avatar Event (Holobox is heavy — ~double load-in/out crew).
+
+**Avatar Event (bez Holoboxu)** is lighter: 1× tech support on-site, 2× Stage Hands, + Avatar pronájem + Avatar nastavení.
+
+**Wrong:**
+| Položka | Cena |
+|---------|------|
+| AI Avatar Hardware — rental | 25 000 |
+
+**Correct:**
+| Položka | Cena |
+|---------|------|
+| Holobox — pronájem jednotky | 20 000 (Std) |
+| AI Avatar — licence a nastavení | 10 000 (Std) |
 
 ## Error Handling
 - **Item not found**: Warn user, ask for clarification

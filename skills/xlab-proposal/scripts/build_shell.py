@@ -6,14 +6,14 @@ Usage:
     python3 build_shell.py <output_shell.pptx> [--title "Project Name"] [--client "Client Name"]
 
 Creates a PPTX with:
-  - Cover slide from Layout 1 (Cover + X Ray)
+  - Cover slide from Layout 1 (Cover + X Ray) with title + subtitle placeholders
   - Closing slide from Layout 15 (Bye Bye)
 """
 import sys
 import os
 import re
 import shutil
-import argparse
+import subprocess
 
 PPTX_SCRIPTS = "/mnt/skills/public/pptx/scripts"
 sys.path.insert(0, PPTX_SCRIPTS)
@@ -22,112 +22,221 @@ sys.path.insert(0, os.path.join(PPTX_SCRIPTS, "office"))
 TEMPLATE_PATH = "/mnt/skills/user/xlab-pptx-template/assets/XLAB_PPT_ALL.pptx"
 
 
-def build_shell(output_path, title=None, client=None):
-    work_dir = "/tmp/shell-build"
-    if os.path.exists(work_dir):
-        shutil.rmtree(work_dir)
+def _xml_escape(text):
+    return (text
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;")
+            .replace("'", "&apos;"))
 
-    # Unpack template
-    from unpack import unpack
-    from pack import pack
-    unpack(TEMPLATE_PATH, work_dir)
 
-    # Add cover slide from layout 1
-    add_slide_script = os.path.join(PPTX_SCRIPTS, "add_slide.py")
+COVER_SLIDE_XML = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+       xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+       xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Title 1"/>
+          <p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr>
+          <p:nvPr><p:ph type="ctrTitle"/></p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr lang="cs-CZ" dirty="0"/>
+              <a:t>{TITLE}</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Subtitle 2"/>
+          <p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr>
+          <p:nvPr><p:ph type="subTitle" idx="1"/></p:nvPr>
+        </p:nvSpPr>
+        <p:spPr/>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          <a:p>
+            <a:r>
+              <a:rPr lang="cs-CZ" dirty="0"/>
+              <a:t>{SUBTITLE}</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>'''
 
-    # Find layout files to determine which layout is "Cover + X Ray" and "Bye Bye"
-    # We need to check layout names in the XML
-    layout_dir = os.path.join(work_dir, "ppt", "slideLayouts")
-    cover_layout = None
-    closing_layout = None
+CLOSING_SLIDE_XML = '''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+       xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+       xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>'''
 
+
+def find_layout_by_name(layout_dir, target_name_part):
     for f in sorted(os.listdir(layout_dir)):
         if not f.endswith(".xml"):
             continue
         path = os.path.join(layout_dir, f)
         with open(path, "r", encoding="utf-8") as fh:
             content = fh.read()
-        # Look for layout name
         name_match = re.search(r'<p:cSld\s+name="([^"]*)"', content)
         if name_match:
-            name = name_match.group(1)
-            if "cover" in name.lower() or "x ray" in name.lower() or "xray" in name.lower():
-                cover_layout = f
-                print(f"Found cover layout: {f} ({name})")
-            if "bye" in name.lower() or "closing" in name.lower() or "end" in name.lower():
-                closing_layout = f
-                print(f"Found closing layout: {f} ({name})")
+            name = name_match.group(1).lower()
+            if target_name_part.lower() in name:
+                return f, name_match.group(1)
+    return None, None
 
-    # Fallback to layout numbers if names not found
+
+def build_shell(output_path, title=None, client=None):
+    work_dir = "/tmp/shell-build"
+    if os.path.exists(work_dir):
+        shutil.rmtree(work_dir)
+
+    from unpack import unpack
+    from pack import pack
+    unpack(TEMPLATE_PATH, work_dir)
+
+    slides_dir = os.path.join(work_dir, "ppt", "slides")
+    rels_dir = os.path.join(slides_dir, "_rels")
+    os.makedirs(slides_dir, exist_ok=True)
+    os.makedirs(rels_dir, exist_ok=True)
+
+    layout_dir = os.path.join(work_dir, "ppt", "slideLayouts")
+    pres_rels_dir = os.path.join(work_dir, "ppt", "_rels")
+
+    # Find layouts
+    cover_layout, cover_name = find_layout_by_name(layout_dir, "cover slide + x ray")
     if not cover_layout:
         cover_layout = "slideLayout1.xml"
-        print(f"Using fallback cover layout: {cover_layout}")
+        cover_name = "(fallback)"
+    print(f"Cover layout: {cover_layout} ({cover_name})")
+
+    closing_layout, closing_name = find_layout_by_name(layout_dir, "bye bye")
     if not closing_layout:
-        # Try layout 15 or the last one
-        layouts = sorted([f for f in os.listdir(layout_dir) if f.endswith(".xml")])
-        closing_layout = "slideLayout15.xml" if "slideLayout15.xml" in layouts else layouts[-1]
-        print(f"Using fallback closing layout: {closing_layout}")
+        closing_layout = "slideLayout15.xml"
+        closing_name = "(fallback)"
+    print(f"Closing layout: {closing_layout} ({closing_name})")
 
-    # Use add_slide.py to create slides from layouts
-    import subprocess
-    result1 = subprocess.run(
-        ["python3", add_slide_script, work_dir, cover_layout],
-        capture_output=True, text=True
+    # Create slide files directly
+    cover_xml = COVER_SLIDE_XML.replace(
+        "{TITLE}", _xml_escape(title or "NÁZEV PROJEKTU")
+    ).replace(
+        "{SUBTITLE}", _xml_escape(client or "Klient")
     )
-    print(f"Cover slide: {result1.stdout.strip()}")
+    with open(os.path.join(slides_dir, "slide1.xml"), "w", encoding="utf-8") as f:
+        f.write(cover_xml)
 
-    result2 = subprocess.run(
-        ["python3", add_slide_script, work_dir, closing_layout],
-        capture_output=True, text=True
-    )
-    print(f"Closing slide: {result2.stdout.strip()}")
+    cover_rels = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/{cover_layout}"/>
+</Relationships>'''
+    with open(os.path.join(rels_dir, "slide1.xml.rels"), "w", encoding="utf-8") as f:
+        f.write(cover_rels)
 
-    # Parse the sldId entries from add_slide output
-    cover_sldid = re.search(r'<p:sldId[^/]*/>', result1.stdout)
-    closing_sldid = re.search(r'<p:sldId[^/]*/>', result2.stdout)
+    with open(os.path.join(slides_dir, "slide2.xml"), "w", encoding="utf-8") as f:
+        f.write(CLOSING_SLIDE_XML)
 
-    # Update presentation.xml to only contain our two new slides
+    closing_rels = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/{closing_layout}"/>
+</Relationships>'''
+    with open(os.path.join(rels_dir, "slide2.xml.rels"), "w", encoding="utf-8") as f:
+        f.write(closing_rels)
+
+    print(f"Created slide1.xml (cover) + slide2.xml (closing)")
+
+    # Add slide relationships to presentation.xml.rels
+    pres_rels_path = os.path.join(pres_rels_dir, "presentation.xml.rels")
+    with open(pres_rels_path, "r", encoding="utf-8") as f:
+        pres_rels_content = f.read()
+    max_rid = max([int(m) for m in re.findall(r'Id="rId(\d+)"', pres_rels_content)], default=0)
+
+    cover_rid = f"rId{max_rid + 1}"
+    closing_rid = f"rId{max_rid + 2}"
+
+    new_rels = f'  <Relationship Id="{cover_rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide1.xml"/>\n  <Relationship Id="{closing_rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide2.xml"/>'
+    pres_rels_content = pres_rels_content.replace("</Relationships>", new_rels + "\n</Relationships>")
+    with open(pres_rels_path, "w", encoding="utf-8") as f:
+        f.write(pres_rels_content)
+
+    # Update presentation.xml — add sldIdLst
     pres_path = os.path.join(work_dir, "ppt", "presentation.xml")
     with open(pres_path, "r", encoding="utf-8") as f:
         pres = f.read()
 
-    new_sld_list = "<p:sldIdLst>\n"
-    if cover_sldid:
-        new_sld_list += f"    {cover_sldid.group()}\n"
-    if closing_sldid:
-        new_sld_list += f"    {closing_sldid.group()}\n"
-    new_sld_list += "  </p:sldIdLst>"
+    sld_list = f'''<p:sldIdLst>
+    <p:sldId id="256" r:id="{cover_rid}"/>
+    <p:sldId id="257" r:id="{closing_rid}"/>
+  </p:sldIdLst>'''
 
-    pres = re.sub(r'<p:sldIdLst>.*?</p:sldIdLst>', new_sld_list, pres, flags=re.DOTALL)
+    if "<p:sldIdLst>" in pres:
+        pres = re.sub(r'<p:sldIdLst>.*?</p:sldIdLst>', sld_list, pres, flags=re.DOTALL)
+    elif "<p:sldSz" in pres:
+        pres = pres.replace("<p:sldSz", f"{sld_list}\n  <p:sldSz")
+    else:
+        pres = pres.replace("</p:presentation>", f"  {sld_list}\n</p:presentation>")
 
     with open(pres_path, "w", encoding="utf-8") as f:
         f.write(pres)
 
-    # Edit cover slide text if title/client provided
-    if title or client:
-        slides_dir = os.path.join(work_dir, "ppt", "slides")
-        # Find the cover slide (most recently created)
-        slides = sorted([f for f in os.listdir(slides_dir) if f.endswith(".xml")])
-        # The add_slide creates new slide files — find them
-        for slide_file in slides:
-            slide_path = os.path.join(slides_dir, slide_file)
-            with open(slide_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            # Look for placeholder text patterns and replace
-            if title:
-                content = re.sub(
-                    r'(<a:t>)(Project Title|NÁZEV PROJEKTU|Click to edit|Klikněte)(</a:t>)',
-                    f'\\1{title}\\3',
-                    content, flags=re.IGNORECASE
-                )
-            if client:
-                content = re.sub(
-                    r'(<a:t>)(Client Name|KLIENT|Subtitle|Podtitul)(</a:t>)',
-                    f'\\1{client}\\3',
-                    content, flags=re.IGNORECASE
-                )
-            with open(slide_path, "w", encoding="utf-8") as f:
-                f.write(content)
+    # Update [Content_Types].xml
+    ct_path = os.path.join(work_dir, "[Content_Types].xml")
+    with open(ct_path, "r", encoding="utf-8") as f:
+        ct = f.read()
+    for slide_name in ["slide1.xml", "slide2.xml"]:
+        override = f'<Override PartName="/ppt/slides/{slide_name}" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>'
+        if override not in ct:
+            ct = ct.replace("</Types>", f"  {override}\n</Types>")
+    with open(ct_path, "w", encoding="utf-8") as f:
+        f.write(ct)
 
     # Clean and pack
     clean_script = os.path.join(PPTX_SCRIPTS, "clean.py")
@@ -137,6 +246,7 @@ def build_shell(output_path, title=None, client=None):
 
 
 if __name__ == "__main__":
+    import argparse
     parser = argparse.ArgumentParser(description="Build proposal shell from XLAB template")
     parser.add_argument("output", help="Output PPTX path")
     parser.add_argument("--title", help="Project title for cover slide")

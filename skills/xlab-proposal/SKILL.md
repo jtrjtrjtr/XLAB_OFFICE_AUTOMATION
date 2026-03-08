@@ -47,27 +47,19 @@ python3 /mnt/skills/user/xlab-brand/scripts/extract_assets.py /tmp/xlab-assets
 ### Step 2: Build Shell from Template
 
 ```bash
-# Unpack template
-python /mnt/skills/public/pptx/scripts/office/unpack.py \
-  /mnt/skills/user/xlab-pptx-template/assets/XLAB_PPT_ALL.pptx /tmp/template-unpacked/
-
-# Create cover from Layout 1 (Cover + X Ray)
-python /mnt/skills/public/pptx/scripts/add_slide.py /tmp/template-unpacked/ slideLayout1.xml
-
-# Create closing from Layout 15 (Bye Bye)
-python /mnt/skills/public/pptx/scripts/add_slide.py /tmp/template-unpacked/ slideLayout15.xml
+python3 /mnt/skills/user/xlab-proposal/scripts/build_shell.py /tmp/shell.pptx \
+  --title "Project Name" \
+  --client "Client Name"
 ```
 
-Then edit `presentation.xml` to keep only cover + closing slides in `<p:sldIdLst>`, clean, and pack:
+The script automatically:
+- Finds Cover + X Ray layout (Layout 1) and Bye Bye layout (Layout 15)
+- Creates cover slide with **instantiated title and subtitle placeholders** (title = project name, subtitle = client)
+- Creates closing slide (contact info comes from the layout)
+- Sets up slide relationships, content types, and packs the shell
+- Validates XML before output
 
-```bash
-python /mnt/skills/public/pptx/scripts/clean.py /tmp/template-unpacked/
-python /mnt/skills/public/pptx/scripts/office/pack.py /tmp/template-unpacked/ /tmp/shell.pptx \
-  --original /mnt/skills/user/xlab-pptx-template/assets/XLAB_PPT_ALL.pptx
-```
-
-Edit cover slide text: replace placeholder title with project name and client name.
-Edit closing slide text: update contact details if needed.
+⚠️ The cover layout has placeholder definitions but `add_slide.py` creates empty slides without them. `build_shell.py` solves this by writing cover slide XML directly with `<p:ph type="ctrTitle"/>` and `<p:ph type="subTitle" idx="1"/>` elements.
 
 ### Step 3: Generate Content Slides with pptxgenjs
 
