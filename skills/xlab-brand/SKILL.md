@@ -278,7 +278,9 @@ These rules come from the brand manual and must always be respected:
 
 ## Tone of Communication
 
-XLAB's voice is calm, professional, and human. No superlatives, no marketing hype, no exclamation marks, no emoji. Factual, understated confidence. Czech language by default unless specified otherwise.
+The full voice guide lives in the **xlab-content** skill (tone, examples, CZ/EN, Communication vs Creative mode). xlab-brand owns the visuals; xlab-content owns the words — defer to it for anything text-bearing.
+
+In short: XLAB writes calmly and factually, and lets the work speak. The language can be vivid and expressive — in **Creative mode** (concepts, scenarios, pitch ideas) richer imagery is welcome; in everyday client text it stays grounded. Default language is Czech unless specified.
 
 ## Asset References
 
