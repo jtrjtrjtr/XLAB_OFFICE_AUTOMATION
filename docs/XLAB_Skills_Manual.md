@@ -122,14 +122,15 @@ Kdykoliv píšete text nesoucí jméno XLAB — web, social media, nabídky, ema
 
 **Platí pro:** web, sociální sítě, nabídky, tiskové zprávy, emaily, popisy služeb, klientské dokumenty.
 
-**Pravidla:**
-- Faktický, přesný, žádné superlativy
-- Žádné marketingové fráze ("unikátní", "komplexní řešení", "inovativní přístup")
-- Žádné emocionální přehánění ("zbožňujeme", "jsme posedlí", "s hrdostí")
-- Žádné vykřičníky, emoji, tři tečky
-- Věty 10–20 slov, odstavce 2–3 věty
-- Český text: "videomapping", "imerzivní", "kreativní design"
-- Anglický text: "projection mapping", "immersive", "creative design"
+**Pravidla** (plný voice guide drží skill `xlab-content`):
+- Faktický, přesný tón — necháváme mluvit práci.
+- Konkrétní formulace místo prázdné chvály (vyhýbáme se frázím typu „unikátní", „komplexní řešení", „inovativní přístup").
+- Klidná sebejistota — bez emočního přehánění („zbožňujeme", „jsme posedlí", „s hrdostí").
+- Bez vykřičníků, emoji a tří teček.
+- Věty 10–20 slov, odstavce 2–3 věty.
+- Jazyk smí být živý a konkrétní — strohost není cíl. Pro koncepty/scénáře/pitch viz Creative Mode níže.
+- Český text: „videomapping", „imerzivní", „kreativní design"
+- Anglický text: „projection mapping", „immersive", „creative design"
 
 **Příklad správného textu:**
 > XLAB navrhuje a produkuje eventy, vizuální show, holografické instalace a imerzivní prostory. Působíme od roku 1998.
