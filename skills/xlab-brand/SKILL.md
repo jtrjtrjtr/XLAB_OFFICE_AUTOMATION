@@ -278,7 +278,9 @@ These rules come from the brand manual and must always be respected:
 
 ## Tone of Communication
 
-XLAB's voice is calm, professional, and human. Factual, understated confidence. Every sentence says what something is or does. Czech language by default unless specified otherwise. Punctuation: periods and em dashes.
+XLAB's voice is calm, professional, and human. Factual, understated confidence. Every sentence says what something is or does. Punctuation: periods and em dashes. Czech by default unless specified otherwise.
+
+The full voice guide lives in the **xlab-content** skill (tone, examples, CZ/EN, Communication vs Creative mode) — defer to it for anything text-bearing. xlab-brand owns the visuals; xlab-content owns the words. The language can be vivid and expressive; in **Creative mode** (concepts, scenarios, pitch ideas) richer imagery is welcome.
 
 ## Asset References
 
