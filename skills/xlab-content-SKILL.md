@@ -1,6 +1,6 @@
 ---
 name: xlab-content
-description: XLAB brand voice and product portfolio knowledge base in Czech and English. Use when writing any text for XLAB — web copy, proposals, presentations, social media, emails, press releases. Contains tone rules, banned phrases, writing examples, and detailed descriptions of all six product areas. Always use together with xlab-brand for visual identity.
+description: XLAB brand voice and product portfolio knowledge base in Czech and English. Use when writing any text for XLAB — web copy, proposals, presentations, social media, emails, press releases. Contains tone rules, preferred phrases, writing examples, and detailed descriptions of all six product areas. Always use together with xlab-brand for visual identity.
 ---
 
 # XLAB Content Skill
@@ -23,7 +23,7 @@ Always combine with `xlab-brand` for visual identity (colors, typography, logos)
 - Default to Czech unless the user specifies English or the output context requires English
 - Czech terminology: videomapping, kreativní design, imerzivní
 - English terminology: projection mapping, creative design, immersive
-- Never mix languages within one document
+- Keep one language per document
 
 ## Communication Modes
 
@@ -33,7 +33,7 @@ This skill distinguishes two modes. Claude should determine which mode applies b
 
 Applies to: website, social media, proposals, press releases, emails, client-facing documents, product descriptions.
 
-Full voice guide rules apply. Factual, precise, no superlatives, no pathos, no marketing clichés. This is how XLAB speaks to the outside world.
+Full voice guide rules apply. Factual, precise, concrete. This is how XLAB speaks to the outside world.
 
 ### Creative Mode
 
@@ -42,10 +42,10 @@ Applies to: creative concepts, show scenarios, dramaturgical scripts, moodboards
 Voice guide rules are relaxed:
 - Language **can** be vivid, poetic, atmospheric and emotionally expressive
 - Imagery and metaphor are welcome — "the facade dissolves into light", "the space breathes with the audience" are fine in a creative concept
-- Superlatives remain avoided — even in creative mode, XLAB does not shout or exaggerate
-- The core identity stays: calm confidence, no exclamation marks, no emoji, no advertising tone
+- Superlatives remain avoided — even in creative mode, XLAB communicates with calm confidence
+- The core identity stays: confidence through specificity, period at the end of sentences, understated tone
 
-**The difference is not about quality but about purpose.** Communication mode describes what we do. Creative mode imagines what something could feel like.
+**The difference is about purpose.** Communication mode describes what we do. Creative mode imagines what something could feel like.
 
 When the user asks for creative work (concepts, scenarios, pitches of ideas), Claude should automatically apply creative mode and note this at the start of the output. When writing client-facing or marketing text, communication mode applies by default.
 
@@ -57,139 +57,165 @@ These rules apply fully in **communication mode**. In **creative mode**, section
 
 ## A1. Purpose
 
-This guide defines how XLAB communicates — in writing and speech, internally and externally. It is a practical writing guide, not a manifesto.
+This guide defines how XLAB communicates — in writing and speech, internally and externally. It is a practical writing guide.
 
 Applies to: website, social media, presentations, proposals, emails, press releases, and any other text carrying the XLAB name.
 
 ## A2. Core Principle
 
-XLAB speaks the way it works — calmly, precisely and without excess. We write as though explaining a project to an intelligent person who does not work in our field. We respect their time and intelligence.
+XLAB speaks the way it works — calmly, precisely and with purpose. We write as though explaining a project to an intelligent person who does not work in our field. We respect their time and intelligence.
 
 Three rules:
 - **Say what we do.** Concretely and clearly.
-- **Be factual.** Generic phrases about "innovation" and "experience" say nothing.
-- **Let the work speak.** Communicate quality through context and facts, not through evaluation.
+- **Be factual.** Replace generic phrases with specific descriptions of the work.
+- **Let the work speak.** Communicate quality through context and facts.
 
 ## A3. Tone
 
-The XLAB voice is mature, factual and human. It is the voice of someone who understands their work and feels no need to prove it.
+The XLAB voice is mature, factual and human. It is the voice of someone who understands their work and feels confident in it.
 
-XLAB is neither stiff-corporate nor advertising-enthusiastic. Behind every project there is creative thinking about how the result should affect people. The language can reflect this — it can be vivid and expressive, as long as it remains factual.
+XLAB occupies a specific register: technical awareness combined with creative sensitivity. Behind every project there is thinking about how the result should affect people. The language reflects this — it is vivid and expressive while staying grounded in facts.
 
 ### Tone by Context
 
 | Context | Tone |
 |---------|------|
-| Web & social media | Direct, concise, clear. Short sentences. No unnecessary adjectives. |
-| Proposals & presentations | Factual, structured, trustworthy. Facts before impressions. |
-| Newsletter | Warmer, more personal. Informal but not rambling. |
-| Press releases | Neutral, factual. No self-praise. |
+| Web & social media | Direct, concise, clear. Short sentences. Concrete language. |
+| Proposals & presentations | Factual, structured, trustworthy. Facts first, impressions second. |
+| Newsletter | Warmer, more personal. Informal, focused. |
+| Press releases | Neutral, factual. Results and context. |
 
-### Finding the Middle Ground
+### Voice Position
 
-Most agencies communicate with enthusiasm: "we love creating", "we're obsessed with innovation". Purely technical companies speak in specifications and lists. XLAB sits between these poles — we talk about what we do, with awareness of why we do it.
+XLAB talks about what it does, with awareness of why it does it. The tone combines technical precision with human perspective — we describe the craft and the intention behind it.
 
 ## A4. Language and Style
 
-**Sentences:** Medium length, 10–20 words. Calm rhythm, occasionally short for emphasis. Avoid sentences over three lines.
+**Sentences:** Medium length, 10–20 words. Calm rhythm, occasionally short for emphasis.
 
 **Paragraphs:** Two to three sentences. Each paragraph = one thought.
 
-**Punctuation:** Em dashes (–) instead of parentheses where clearer. No ellipses. No exclamation marks. No emoji.
+**Punctuation:** Em dashes (–) instead of parentheses where clearer. Period at the end.
 
 **Capitalisation:** Title case only in presentation materials (slides, web hero sections). Standard sentence case in running text.
 
-### Beware the "X, Not Y" Pattern
+### Always State What Something Is
 
-Contrastive framing ("we do X, not just Y") should be used sparingly. If it repeats in every paragraph, the text sounds defensive. Occasionally fine — "technology is a means, not an end" works. As a recurring pattern it harms the text.
+Every sentence should say what something **is** or what it **does**. Direct positive statements carry more confidence and read more naturally.
 
-✗ "We design events where technology is part of the narrative, not just equipment. We create experiences that engage, not just inform."
+When writing about XLAB, describe the work, the method, or the result. Build each sentence around a verb that says what happens.
+
 ✓ "Our events combine visual design, technology and dramaturgy."
+✓ "Technology serves the narrative of the event."
+✓ "The AI avatar responds to visitors autonomously."
+✓ "Visitors experience AI directly through conversation."
 
-## A5. Banned Words and Phrases
+IMPORTANT: Contrastive constructions ("X, not Y" / "not X, but Y" / "X instead of Y" / "no X, no Y") are **banned from all XLAB text**. Every idea can be expressed as a direct statement about what something is or does. If a sentence defines something by saying what it isn't, rewrite it to say what it is.
 
-These expressions are not used in XLAB texts. There is always a more concrete way to say the same thing.
+### Preferred Czech Terms
+
+| Use | Instead of | Context |
+|-----|------------|---------|
+| ve spojitém obraze | v nepřetržitém obraze | 360° projection — "spojitý" conveys spatial continuity; "nepřetržitý" implies temporal dimension |
+
+## A5. Words to Replace
+
+The expressions below are too vague or evaluative for XLAB texts. Each one has a more concrete alternative — describe the specific quality, method, or outcome instead.
 
 ### Superlatives and Evaluations
-✗ "unique", "exceptional", "breathtaking", "one-of-a-kind", "fantastic", "world-class", "state-of-the-art", "best-in-class", "cutting-edge", "špičkový", "unikátní", "výjimečný", "dechberoucí"
+
+Replace with specifics: "unique" → describe what makes it distinct. "World-class" → name the standard or benchmark. "Cutting-edge" → name the technology.
+
+Words to replace: "unique", "exceptional", "breathtaking", "one-of-a-kind", "fantastic", "world-class", "state-of-the-art", "best-in-class", "cutting-edge", "špičkový", "unikátní", "výjimečný", "dechberoucí"
 
 ### Marketing Phrases
-✗ "bespoke", "end-to-end solution", "innovative approach", "synergy", "paradigm", "pushing boundaries", "driving change", "the future starts here", "turnkey solution", "na míru", "komplexní řešení", "inovativní přístup", "posouváme hranice"
 
-### Emotional Exaggeration
-✗ "we love", "we're obsessed with", "passionately crafted", "proudly presenting", "we're thrilled to announce", "zbožňujeme", "jsme posedlí", "vášnivě tvoříme", "s hrdostí představujeme"
+Replace with concrete descriptions of the service or process.
+
+Words to replace: "bespoke", "end-to-end solution", "innovative approach", "synergy", "paradigm", "pushing boundaries", "driving change", "the future starts here", "turnkey solution", "na míru", "komplexní řešení", "inovativní přístup", "posouváme hranice"
+
+### Emotional Self-Description
+
+Replace with factual statements about the work or the result.
+
+Words to replace: "we love", "we're obsessed with", "passionately crafted", "proudly presenting", "we're thrilled to announce", "zbožňujeme", "jsme posedlí", "vášnivě tvoříme", "s hrdostí představujeme"
 
 ### Vague Buzzwords
-✗ "holistic", "proactive", "optimise" (without context), "transformation" (as buzzword), "ecosystem" (unless literal). These words are not inherently bad — use them only where they precisely describe what we mean.
+
+Use only where they precisely describe what is meant: "holistic", "proactive", "optimise", "transformation", "ecosystem".
 
 ## A6. Examples
 
 ### Company Description
 
-| ✗ Pathos | ✗ Cliché | ✓ XLAB |
-|----------|----------|--------|
-| CZ: XLAB – to je víc než technologie. Je to cesta za zážitkem, který oslovuje srdce i mysl. | CZ: XLAB nabízí unikátní komplexní řešení v oblasti zážitkových technologií na míru. | CZ: XLAB navrhuje a produkuje eventy, vizuální show, holografické instalace a imerzivní prostory. Působíme od roku 1998. |
-| EN: XLAB – more than technology. A journey towards experiences that speak to both heart and mind. | EN: XLAB offers unique end-to-end solutions in experiential technology, tailored to your needs. | EN: XLAB designs and produces events, visual shows, holographic installations and immersive environments. We have been active since 1998. |
+**XLAB voice:**
+
+| CZ | EN |
+|----|-----|
+| XLAB navrhuje a produkuje eventy, vizuální show, holografické instalace a imerzivní prostory. Působíme od roku 1998. | XLAB designs and produces events, visual shows, holographic installations and immersive environments. We have been active since 1998. |
 
 ### Service Description – Projection Mapping
 
-| ✗ Pathos | ✗ Cliché | ✓ XLAB |
-|----------|----------|--------|
-| CZ: Architektura začne dýchat a vyprávět příběhy světlem. | CZ: Naše špičkové projekční řešení na míru transformují architektonické objekty. | CZ: Mapping je projekční technologie, která oživuje architekturu pohyblivým obrazem a zvukem. Navrhujeme obsah tak, aby respektoval prostor a dal mu nový rozměr. |
-| EN: Architecture begins to breathe and tell stories through light. | EN: Our cutting-edge bespoke projection solutions transform architectural objects. | EN: Projection mapping brings architecture to life with moving image and sound. We design content to respect the space and give it a new dimension. |
+**XLAB voice:**
+
+| CZ | EN |
+|----|-----|
+| Mapping je projekční technologie, která oživuje architekturu pohyblivým obrazem a zvukem. Navrhujeme obsah tak, aby respektoval prostor a dal mu nový rozměr. | Projection mapping brings architecture to life with moving image and sound. We design content to respect the space and give it a new dimension. |
 
 ### Opening Sentence
 
-| ✗ | ✓ |
-|---|---|
-| CZ: Svět zážitků se mění. My měníme způsob, jak ho prožít. | CZ: XLAB je tech-artová agentura. Navrhujeme a produkujeme eventy, vizuální show, holografické instalace a imerzivní prostory. |
-| EN: The world of experience is changing. We are changing the way you experience it. | EN: XLAB is a tech-art agency. We design and produce events, visual shows, holographic installations and immersive environments. |
+**XLAB voice:**
+
+| CZ | EN |
+|----|-----|
+| XLAB je tech-artová agentura. Navrhujeme a produkujeme eventy, vizuální show, holografické instalace a imerzivní prostory. | XLAB is a tech-art agency. We design and produce events, visual shows, holographic installations and immersive environments. |
 
 ### Process Description
 
-| ✗ | ✓ |
-|---|---|
-| CZ: Každý projekt začíná jednoduchou otázkou: jaký pocit by tento moment měl vyvolat? | CZ: Na začátku stojí rozhovor s klientem a otázka, jak má projekt působit na lidi – podle toho volíme prostředky, prostor i technologie. |
-| EN: Every project begins with a simple question: what feeling should this moment evoke? | EN: Every project starts with a conversation with the client and a question: how should the result affect the audience? Based on that, we choose the means, space and technology. |
+**XLAB voice:**
+
+| CZ | EN |
+|----|-----|
+| Na začátku stojí rozhovor s klientem a otázka, jak má projekt působit na lidi – podle toho volíme prostředky, prostor i technologie. | Every project starts with a conversation with the client and a question: how should the result affect the audience? Based on that, we choose the means, space and technology. |
 
 ## A7. Language-Specific Notes
 
 ### Czech
-- "videomapping" (not "projekční mapping") — "projection mapping" only in English
-- "imerzivní" (not "imerzní")
-- "kreativní design" (not "vizuální design" as general term)
-- "zážitková technologie" as translation of "experiential technology" sounds like a trade fair leaflet — describe concretely what we do, or use "vizuální technologie" / "interaktivní technologie"
-- Avoid overly formal corporate Czech: "v rámci naší spolupráce", "s ohledem na požadavky klienta"
-- Avoid overly poetic Czech: "prostory, které dýchají", "světlo, které vypráví"
+- "videomapping" — in English use "projection mapping"
+- "imerzivní" — standard Czech form
+- "kreativní design" — preferred general term
+- "zážitková technologie" sounds like a trade fair leaflet — describe concretely what we do, or use "vizuální technologie" / "interaktivní technologie"
+- Prefer direct, conversational Czech: "spolupracujeme s klientem" over "v rámci naší spolupráce"
+- Keep language grounded: "projekce pokrývá celý prostor" over "prostory, které dýchají"
 
 ### English
-- "projection mapping" (not "videomapping")
-- "immersive" (not "immersional")
-- "creative design" (not "visual design" as general descriptor)
-- "experiential technology" is acceptable as industry term but should not replace concrete descriptions
-- Avoid startup speak: "disrupt", "game-changing", "next-level"
-- Avoid corporate filler: "leveraging our expertise", "in today's rapidly evolving landscape"
+- "projection mapping" — standard English term
+- "immersive" — standard English form
+- "creative design" — preferred general descriptor
+- "experiential technology" is acceptable as industry term alongside concrete descriptions
+- Prefer precise language: "we design real-time interactive installations" over "we disrupt the experience landscape"
+- Prefer plain English: "we work across six disciplines" over "leveraging our expertise across verticals"
 
 ## A8. Text Structure
 
-**Opening:** Start with a fact, context or direct statement. Never with a question, never with a grand declaration. First sentence says what the text is about.
+**Opening:** Start with a fact, context or direct statement. First sentence says what the text is about.
 
-**Middle:** Linear progression: what it is → how it works → what it is for. Each paragraph adds new information. No repeating the same thought in different words.
+**Middle:** Linear progression: what it is → how it works → what it is for. Each paragraph adds new information.
 
-**Closing:** No grand conclusions, no calls to action. The last sentence summarises or naturally closes the topic. Text ends when it has said what it needed to.
+**Closing:** The last sentence summarises or naturally closes the topic. Text ends when it has said what it needed to.
 
-**Length:** Shorter is better. If text works without a paragraph, that paragraph does not belong.
+**Length:** Shorter is better. If text works without a paragraph, remove that paragraph.
 
 ## A9. Checklist
 
 Before publishing:
 1. Does the first sentence say what the text is about?
-2. Are there superlatives or evaluative adjectives? Delete them.
-3. Is any thought repeated? Keep one version.
-4. Does it sound like advertising? Rewrite factually.
-5. Would someone unfamiliar with XLAB understand it? If not, simplify.
-6. Can the text be shortened by a third without losing content? Shorten it.
-7. Does the "X, not Y" pattern repeat? Rephrase directly.
+2. Does every sentence describe what something **is** or **does**? Rewrite any sentence that defines something by what it isn't.
+3. Are there superlatives or evaluative adjectives? Replace with specifics.
+4. Is any thought repeated? Keep one version.
+5. Does the text sound like it's trying to impress? Rewrite to inform.
+6. Would someone unfamiliar with XLAB understand it? If unclear, simplify.
+7. Can the text be shortened by a third? Shorten it.
 
 ---
 
@@ -425,13 +451,13 @@ We design installations of varying scale – from individual rooms to entire bui
 
 **Přehled**
 
-Interaktivní instalace reagují na přítomnost, pohyb a chování lidí. Návštěvník přestává být divákem a stává se součástí dění – jeho akce mění obraz, zvuk nebo chování celého prostoru.
+Interaktivní instalace reagují na přítomnost, pohyb a chování lidí. Návštěvník se stává součástí dění – jeho akce mění obraz, zvuk nebo chování celého prostoru.
 
 Navrhujeme instalace pro eventy, veřejný prostor, showroomy i stálé expozice.
 
 **Náš přístup**
 
-Interaktivita musí být intuitivní. Pokud návštěvník potřebuje návod, něco nefunguje. Principy: vstupní bod (okamžitá a srozumitelná první reakce), hloubka interakce (jednoduchý vstup, složitější možnosti), odezva (minimální latence), sdílení (individuální i kolektivní interakce).
+Interaktivita musí být intuitivní. Principy: vstupní bod (okamžitá a srozumitelná první reakce), hloubka interakce (jednoduchý vstup, složitější možnosti), odezva (minimální latence), sdílení (individuální i kolektivní interakce).
 
 **Kategorie**
 
@@ -447,13 +473,13 @@ Interaktivita musí být intuitivní. Pokud návštěvník potřebuje návod, n�
 
 **Overview**
 
-Interactive installations respond to people's presence, movement and behaviour. The visitor stops being a spectator and becomes part of the action – their actions change the visuals, sound or behaviour of the entire space.
+Interactive installations respond to people's presence, movement and behaviour. The visitor becomes part of the action – their actions change the visuals, sound or behaviour of the entire space.
 
 We design installations for events, public spaces, showrooms and permanent exhibitions.
 
 **Our Approach**
 
-Interactivity must be intuitive. If a visitor needs instructions, something is not working. Principles: entry point (immediate, clear first response), depth of interaction (simple entry, richer possibilities), response (minimal latency), sharing (individual and collective interaction).
+Interactivity must be intuitive. Principles: entry point (immediate, clear first response), depth of interaction (simple entry, richer possibilities), response (minimal latency), sharing (individual and collective interaction).
 
 **Categories**
 

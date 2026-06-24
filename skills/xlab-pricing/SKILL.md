@@ -94,15 +94,34 @@ User describes event
 
 ### Ceník XLSX v5 (bundled in SKILL_DIR/data/)
 
-Columns: A=Položka, B=Popis (client description), C=Jednotka, D=Nákladová, E=Snížená, F=Standard, G=Premium, H=Poznámka (internal)
+Columns: A=Položka, B=Popis (client description), C=Jednotka, D=Nákladová, E=Snížená, F=Standard, G=Premium, H=Poznámka (internal), I=Orient. den (Lidé only)
 
 6 sheets:
-- **Lidé** — 38+ roles (hourly rates)
-- **Technika** — 30+ items (daily/set rates)
-- **Produkce & Logistika** — 44+ items
+- **Lidé** — 45 roles (hourly rates), column I = orientační denní sazba (9h)
+- **Technika** — 54 items: Media servery, Doplňky, Displeje, Kamery, Interakce, Speciální technika, Avatar/Holobox, Osvětlení, Zvuk, Kabeláž
+- **Produkce & Logistika** — 48 items
 - **Pravidla** — pricing rules
-- **Alokační šablony** — 7 event type templates
-- **Sestavy** — 16 typical assemblies
+- **Alokační šablony** — 9 event type templates
+- **Sestavy** — 18+ typical assemblies
+
+**XLAB vlastní technika vs. externí:** Položky v ceníku do sekce AI Avatar & Holobox (cca R1–R43) jsou vlastní technika XLAB. Osvětlení, Zvuk a Kabeláž (R42+) jsou orientační ceny pro menší akce. Pro větší akce s externím ozvučením / nasvícením viz LSE ceníky.
+
+### LSE — Externí dodavatel techniky
+
+Referenční ceníky od LSE (XLAB's standard external tech supplier) jsou v `SKILL_DIR/data/lse/`:
+- `1_Nabidka_LED_PROJEKCE_VIDEO-ceni_k_techniky-35sleva.pdf` — video, projektory, LED, kamery, monitory
+- `2_Nabidka_ZVUK_SVE_TLA_KONSTRUKCE_TLUM-ceni_k_techniky-35sleva.pdf` — zvuk, osvětlení, konstrukce, tlumočení
+- `3_Nabidka_PODIUM-MOBILNI_-ceni_k-35sleva.pdf` — mobilní podia
+
+**LSE pricing → XLAB tiers:**
+| LSE ceník | → XLAB tier |
+|-----------|-------------|
+| Cena/den (plná) | = **Standard** |
+| Cena -35% | = **Nákladová** |
+| Dopočítat | **Snížená** = Standard × 0.80 |
+| Dopočítat | **Premium** = Standard × 1.20 |
+
+**When to use LSE:** Pokud kalkulace požaduje techniku, která není v XLAB ceníku (velké PA systémy, inteligentní světla, konstrukce, mobilní podia, tlumočení), sáhni do LSE ceníků. Odhadni potřebné položky, najdi je v LSE PDF, a přepočítej na XLAB tiers.
 
 ### Updating the Ceník
 To update prices: download this skill ZIP → unzip → edit `data/XLAB_Centralni_Cenik_v5.xlsx` in Excel → save → re-zip → re-upload skill. No script changes needed for price updates.
@@ -302,9 +321,19 @@ Assets (logos) are auto-detected from `SKILL_DIR/assets/`.
 ## Item Matching Guide (Standard Mode)
 
 ### Media Servers
-- Simple presentation → **Media Server 4K + režie** (15k)
-- Medium with Ventuz → **3D Media Server 2×4K + režie** (35k)
-- Large multi-screen → **3D Media Server 4×4K + režie** (85k)
+
+XLAB keeps only 3D Media Servers. Choose by number of outputs:
+- Small (1-2 outputs) → **3D Media Server 1–2×4K + režie** (20k)
+- Medium (3 outputs) → **3D Media Server 3×4K + režie** (60k)
+- Large (4 outputs) → **3D Media Server 4×4K + režie** (85k)
+- Simple PPT/playback only → **Media Server 4K + režie** (15k) — no 3D capability
+
+**Standard doplňky (add to 3D Media Server 2×4K and higher):**
+- **Externí vstup** (5k/den) — default 1× for larger events
+- **Timecode / MIDI Setup** (6k/set) — for music/show events
+- Optionally: **Režie Roland 4K** (9k) or **DVI Matrix Pixel Hue** (4k) — for music events with video feedback
+
+**For conferences:** Do NOT add music doplňky. Instead add **PPT Setup** (9k/set).
 
 ### Operators
 - Without 3D Media Server → **Video Operator** (950/h)
@@ -317,46 +346,92 @@ Assets (logos) are auto-detected from `SKILL_DIR/assets/`.
 - Medium → **LED 5×3 m** (30k)
 - Large → **LED 8×3 m** (40k)
 
+### Racing Simulators — Always Combined with Display
+
+Racing simulators are standalone cockpits that must be combined with a display:
+
+| Simulator | Default display | Total (Std) |
+|-----------|----------------|-------------|
+| **Mini** (20k) | + TV 86" (9k) | ~29k |
+| **Standard** (30k) | + LED 3×2,5 m (20k) | ~50k |
+| **Advanced** (35k) | + LED 5×3 m (30k) | ~65k |
+
+When unspecified, use the default combination above.
+
+### HoloFan
+- Single unit → **HoloFan Display** (3 500/ks/den)
+- Small array → **HoloFan Set 1×3** (12k/set/den)
+- Large array → **HoloFan Set 2×3** (20k/set/den)
+
+### AI Avatar — Always Combined with Display
+
+AI Avatar licence needs a physical display. Default = Full Body Digital Kiosk.
+
+| Avatar setup | Display | Total (Std) |
+|--------------|---------|-------------|
+| Avatar licence (10k) | + **Full Body Digital Kiosk** (10k) — default | ~20k |
+| Avatar licence (10k) | + **Half Body Digital Kiosk** (8k) | ~18k |
+| Avatar licence (10k) | + **Holobox** (20k) — premium option | ~30k |
+
+Brain development (nastavení pro konkrétní akci) is additional — see Lidé: Brain Development and Setup (1 200/h).
+
 ### Osvětlení
+
+XLAB ceník contains basic lighting for smaller events:
 - Plošné / akcentní nasvícení → **LED PAR 100W** (550/ks/den) — specify quantity by use: "ambient (24 ks)" vs "akcent (6 ks)"
 - Směrové nasvícení objektů / osob → **Profilový reflektor** (900/ks/den)
 - Řízení světel → **Světelný pult + show control** (1 900/set/den)
 
+For larger events requiring moving heads, follow spots, hazers, etc. → source from **LSE ceník** (PDF #2). Apply LSE→XLAB tier conversion.
+
 ### Zvuk
+
+XLAB ceník contains basic sound for smaller events:
 - Ozvučení sálu → **PA systém** (17 500/set/den)
 - Digitální mix → **Mixážní pult** (1 900/set/den)
 - Statický mikrofon → **Mikrofonní stojka** (1 300/ks/den)
 - Bezdrátový mikrofon → **Bezdrátový mikrofon — handka** (2 250/ks/den)
 
+For larger events requiring d&b PA, konferenční mikrofony, in-ear, wireless systems → source from **LSE ceník** (PDF #2). Apply LSE→XLAB tier conversion.
+
 ### Kabeláž
 - Vždy přidat **Kabeláž + spojovací materiál** (5 000/set) — platí pro každou akci s vlastní technikou. Rozsah dle velikosti akce (snížená 4k–6k).
+
+### Konstrukce, podia, tlumočení
+
+Not in XLAB ceník. For truss, Niv-tec, mobilní podia, skirting, tlumočnické systémy → source from **LSE ceník** (PDF #2 and #3). Apply LSE→XLAB tier conversion.
 
 ### Holobox & Avatar — CRITICAL: Always Two Separate Items
 
 Holobox (hardware) and Avatar (AI/digital human) are **two distinct products** with separate prices. Never merge them into a single line item.
 
-When the brief includes avatar + holobox, create **two rows**:
-1. **Holobox — pronájem jednotky** (hardware rental: the physical display unit, transport, installation) — Std **20 000**/set/den
-2. **AI Avatar — licence a nastavení** (the digital human: appearance, voice, brain configuration) — Std **10 000**/set/den
+**Holobox Event** (avatar displayed in Holobox):
+1. **Holobox — pronájem jednotky** (Std 20k) — the physical unit, heavy → needs doubled Stage Hands
+2. **AI Avatar — licence a nastavení** (Std 10k) — the digital human
 
-These go into a shared category section (e.g. "AVATAR & HOLOBOX"), but each has its own row, unit price, and quantity.
+**Avatar Event** (avatar on standalone kiosk, no Holobox):
+1. **AI Avatar — licence a nastavení** (Std 10k)
+2. **Full Body Digital Kiosk** (Std 10k) — default display, or **Half Body Digital Kiosk** (Std 8k)
+3. Lighter load-in — only 2× Stage Hands needed
 
-Additionally, avatar brain work (Brain Development, Brain Customization) belongs in a separate category "AI & AVATAR KONFIGURACE" — this is creative/intellectual work, not hardware.
-
-**Holobox Event** requires significantly more Stage Hands than Avatar Event (Holobox is heavy — ~double load-in/out crew).
-
-**Avatar Event (bez Holoboxu)** is lighter: 1× tech support on-site, 2× Stage Hands, + Avatar pronájem + Avatar nastavení.
+Brain development (AI & Avatar konfigurace) is always a separate creative/intellectual category.
 
 **Wrong:**
 | Položka | Cena |
 |---------|------|
 | AI Avatar Hardware — rental | 25 000 |
 
-**Correct:**
+**Correct (Holobox Event):**
 | Položka | Cena |
 |---------|------|
 | Holobox — pronájem jednotky | 20 000 (Std) |
 | AI Avatar — licence a nastavení | 10 000 (Std) |
+
+**Correct (Avatar Event):**
+| Položka | Cena |
+|---------|------|
+| AI Avatar — licence a nastavení | 10 000 (Std) |
+| Full Body Digital Kiosk | 10 000 (Std) |
 
 ## Error Handling
 - **Item not found**: Warn user, ask for clarification

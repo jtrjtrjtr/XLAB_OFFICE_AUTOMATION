@@ -172,7 +172,7 @@ Content slide header pattern (consistent across all content slides):
 
 ### Documents (DOCX, PDF)
 
-XLAB Word documents use a white background with dark text and yellow accents. The document style is clean and structured — it is NOT the same as the PPTX design (which uses dark backgrounds).
+XLAB Word documents use a white background with dark text and yellow accents. The document style is clean and structured — it is its own format, distinct from the PPTX design (which uses dark backgrounds).
 
 #### Page Setup (A4)
 
@@ -196,17 +196,17 @@ const PAGE = {
 - Subtitle: Arial, 13pt, color #4a4a4a
 - Client name: Arial, 11pt, color #888888
 - Date: Arial, 10pt, color #888888, lower area
-- No header/footer on cover page (separate section)
+- Header/footer disabled on cover page (separate section)
 
 #### Content Pages — Header
 
 - X symbol (black variant, ~24×15px) top-left corner
-- Nothing else in header — keep minimal
+- Minimal — nothing else in header
 
 #### Content Pages — Footer
 
 - Thin gray line on top (BorderStyle.SINGLE, size 2, color CCCCCC)
-- Left: **XLAB logo (black wordmark)** as ImageRun (~80×14px) — NOT text. Use `x_logo_black.png` from brand assets.
+- Left: **XLAB logo (black wordmark)** as ImageRun (~80×14px). Use `x_logo_black.png` from brand assets.
 - Right (tab stop): page number — Arial 8pt, color #888888
 
 #### Typography
@@ -246,7 +246,7 @@ const PAGE = {
 | Highlight box background | #F2F1EC |
 | X symbol / Logo | black variants |
 
-**Key difference from PPTX:** Documents always use light background. Yellow is for decorative elements (rules, borders) — never for text. All text uses grayscale palette.
+**Key principle for PPTX vs DOCX:** Documents always use light background. Yellow is for decorative elements (rules, borders). All text uses grayscale palette.
 
 ### HTML / Artifacts
 
@@ -267,18 +267,18 @@ const PAGE = {
 
 These rules come from the brand manual and must always be respected:
 
-- No color gradients on backgrounds
-- No transparency changes on brand elements
-- No rotating, skewing, or distorting the logo or symbol
-- No adding slogans or text to the logo
-- No colors other than black, white, or yellow on brand elements
-- No graphic effects (shadows, glows, outlines) on the logo
-- No color filters on photography
-- No busy/cluttered photo backgrounds behind brand elements
+- Color gradients on backgrounds
+- Transparency changes on brand elements
+- Rotating, skewing, or distorting the logo or symbol
+- Adding slogans or text to the logo
+- Colors other than black, white, or yellow on brand elements
+- Graphic effects (shadows, glows, outlines) on the logo
+- Color filters on photography
+- Busy/cluttered photo backgrounds behind brand elements
 
 ## Tone of Communication
 
-XLAB's voice is calm, professional, and human. No superlatives, no marketing hype, no exclamation marks, no emoji. Factual, understated confidence. Czech language by default unless specified otherwise.
+XLAB's voice is calm, professional, and human. Factual, understated confidence. Every sentence says what something is or does. Czech language by default unless specified otherwise. Punctuation: periods and em dashes.
 
 ## Asset References
 
