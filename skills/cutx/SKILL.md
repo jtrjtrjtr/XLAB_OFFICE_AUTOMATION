@@ -15,12 +15,23 @@ CutX = Palmier Pro (lokální macOS editor s MCP) + Higgsfield MCP (generování
 ## Workflow
 
 1. **Vždy začni** `get_projects` / `get_timeline` (vrací fps, tracky, clipId — ty přijímají všechny ostatní tooly).
-2. **Generování klipů: přes Higgsfield MCP**, ne přes Palmier. Palmier native generování (`generate_video` v cutx) vyžaduje Palmier předplatné (`canGenerate:false`) — nepoužívej.
+2. **Generování klipů (video): přes Higgsfield MCP**, ne přes Palmier — konzistence přes charaktery/reference + Seedance workflow níže.
    - Higgsfield: `generate_video` → `job_status` (polluj) → výsledná URL z `job_display` / `show_generations`.
+   - Palmier native generování je odemčené (`canGenerate:true` ověřeno 2026-07-12, dřívější poznámka o `canGenerate:false` neplatí) — pro video ho ale dál nepoužívej; slouží pro audio (viz Hudba a ruchy).
 3. **Import do střižny:** `import_media {name, source:{url:"https://..."}}` — stahuje na pozadí, polluj `get_media` dokud asset nemá metadata (duration/width). Funguje pro jakoukoli HTTPS URL (Higgsfield, Kling, Veo, Runway, stock) i lokální cesty (`source:{path}`). Limit 1 GB.
 4. **Timeline:** `add_clips {entries:[{mediaRef, startFrame}]}` — `trackIndex` vynech, track se vytvoří automaticky. `insert_clips` pro ripple insert. Frames jsou `[start, end)` v project fps.
 5. **Střih:** `split_clips`, `move_clips`, `remove_clips`, `ripple_delete_ranges`, `set_clip_properties`, `set_keyframes`, `add_texts`, `add_captions`, `apply_color`, `apply_effect`, `remove_silence`, `detect_beats`.
 6. **Export:** `export_project`.
+
+## Hudba a ruchy — ElevenLabs nativně v Palmier (Jindřich, 2026-07-12)
+
+Preferovaný generátor hudby i ruchů = **ElevenLabs**, přímo přes `generate_audio` v cutx MCP (žádný import loop — výsledek padá do media poolu). Před generováním vždy `list_models {type:"audio"}`.
+
+- **Hudba:** model `elevenlabs-music` — text → hudba, délky 15/30/60/90/120/180 s, umí instrumental.
+- **Ruchy:** model `elevenlabs-sfx-v2` — text → SFX, délky 1–30 s.
+- **Foley synchronní s obrazem:** `mirelo-sfx-v1.5-video-to-audio` (vstup = klip z timeline, ruchy sedí na akci) a `sonilo-v1.1-video-to-music` (hudba komponovaná k obrazu). Použij, když má zvuk kopírovat dění v záběru — odpadá prompt-inženýrství.
+- **Synergya:** hudba → `detect_beats` → střih na dobu. Podkres ztlumit přes `set_clip_properties` / `set_keyframes` (ducking pod voiceover).
+- Fallback / batch mimo střižnu: ElevenLabs API napřímo (účet máme — podcast TTS); případný mini-MCP patří do `~/Projects/cutx-tools` dle MCP-first standardu.
 
 ## Delší videa — pravidla (Jindřich, 2026-07-10)
 
