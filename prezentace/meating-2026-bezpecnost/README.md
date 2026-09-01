@@ -4,7 +4,7 @@ Prezentace pro Český svaz zpracovatelů masa (kontakt Julius Maindl, MULTIVAC 
 Odpovídá na obavy svazu ohledně QR kódů, GDPR u selfie aplikace a bezpečnosti
 technologií nasazovaných na MEATING 2026 (20. 10. 2026, OREA Congress Hotel Brno).
 
-- Formát: 20 slajdů, na šířku, 16:9 (960 × 540 pt)
+- Formát: 22 slajdů, na šířku, 16:9 (960 × 540 pt)
 - Brand: XLAB WHITE theme (podle skillu `xlab-brand`)
 - Jazyk: čeština, srozumitelná i pro publikum, které s technologiemi nepracuje
 
@@ -46,3 +46,6 @@ Rozměr stránky drží `@page { size: 338.667mm 190.5mm; }` v CSS.
 - Notion: `MEATING Selfie Wall — demo postaveno a nasazeno` — retence fotek, text souhlasu, obsahová pravidla
 - Notion: `Avatar Laurin — vazby a návaznosti`, kap. 8 Kamera — kamera neukládá ani neodesílá snímky
 - Notion: `MEATING 2026 — kiosek Marka v1 hotový a otestovaný` — offline/záložní režim, 17 guardrailů
+- Certifikace poskytovatelů (slajdy 5–6) ověřeno u zdroje: ISO/IEC 27001 / 27017 / 27018 / 27701
+  a SOC 2 Type II u Google i OpenAI; EU–USA Data Privacy Framework (rozhodnutí Evropské komise,
+  červenec 2023); data z firemních a API služeb se standardně nepoužívají k trénování modelů.

@@ -143,6 +143,13 @@
   /* ---- closing ---- */
   .big{ font-size:27px; line-height:1.45; max-width:1000px; }
 
+  /* ---- compact variant for dense card slides ---- */
+  .slide.compact .lead{ margin-bottom:20px; font-size:19px; }
+  .slide.compact .accent{ margin:18px 0 24px 0; }
+  .slide.compact .card{ padding:22px 22px 20px 22px; }
+  .slide.compact .card h3{ margin-bottom:12px; font-size:17px; }
+  .slide.compact .card ul li{ font-size:15.5px; line-height:1.38; margin-bottom:8px; }
+
   .note{
     margin-top:auto; font-size:15px; color:var(--gray2);
     border-top:1px solid var(--rule); padding-top:14px; line-height:1.45;
@@ -173,6 +180,7 @@
     <div class="col">
       <ul class="b">
         <li><b>Jak to máme podložené</b> — smlouvy, souhlasy, certifikace</li>
+        <li><b>Technologie, na kterých to běží</b> — a jejich certifikace</li>
         <li><b>Selfie zeď</b> — fotka v uměleckém stylu</li>
         <li><b>Digitální avatar Mark Meatman</b> — mluvící průvodce</li>
       </ul>
@@ -267,7 +275,73 @@
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 5 — SPOLEČNÁ PRAVIDLA -->
+<!-- 5 — TECHNOLOGIE A JEJICH CERTIFIKACE -->
+<section class="slide compact">
+  <div class="overline">Technologie · 1/2</div>
+  <h1>Na čem to běží a jak<br>je to certifikované</h1>
+  <div class="accent"></div>
+  <div class="lead">Používáme <b>standardní cloudové služby velkých amerických poskytovatelů</b> — tytéž, na kterých v Česku běží banky, nemocnice i státní správa.</div>
+  <div class="cards g3">
+    <div class="card">
+      <h3>Certifikace poskytovatelů</h3>
+      <ul>
+        <li><b>ISO/IEC 27001</b> — bezpečnost informací</li>
+        <li><b>ISO/IEC 27017</b> — bezpečnost cloudu</li>
+        <li><b>ISO/IEC 27018</b> — osobní údaje v cloudu</li>
+        <li><b>ISO/IEC 27701</b> — ochrana soukromí</li>
+        <li><b>SOC 2 Type II</b> — nezávislý audit provozu</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Jací poskytovatelé</h3>
+      <ul>
+        <li>Zavedené americké cloudové a AI služby, které používá každá druhá firma v Česku</li>
+        <li><b>Žádní čínští poskytovatelé a žádné čínské modely</b> — vědomé rozhodnutí</li>
+        <li>Část provozu běží na našem vlastním serveru v Německu, tedy uvnitř EU</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ověřitelné, ne slibované</h3>
+      <ul>
+        <li>Certifikáty i auditní zprávy poskytovatelů jsou veřejně dohledatelné</li>
+        <li>Každý rok je znovu prověřuje nezávislý auditor</li>
+        <li>Nespoléháme na vlastní tvrzení — kontroluje to někdo jiný</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Bezpečnost neřešíme sami od nuly — stavíme na službách s nejpřísnějšími mezinárodními certifikacemi, jaké v oboru existují.</div>
+  <div class="pagenum">05</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 6 — PRÁVNÍ RÁMEC PŘENOSU DAT -->
+<section class="slide">
+  <div class="overline">Technologie · 2/2</div>
+  <h1>Zpracování v USA má<br>svá jasná pravidla</h1>
+  <div class="accent"></div>
+  <div class="lead">Že služba běží v USA, není šedá zóna. GDPR na tuhle situaci přímo pamatuje a předepisuje, jak ji ošetřit. My to ošetřené máme.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Rámec EU — USA Data Privacy Framework</b><span class="sub">Rozhodnutí Evropské komise z července 2023. Certifikovaní poskytovatelé v USA mají uznanou odpovídající úroveň ochrany.</span></li>
+        <li><b>Standardní smluvní doložky</b><span class="sub">Vzorové doložky schválené Evropskou komisí, součást smluv s poskytovateli.</span></li>
+        <li><b>Zpracovatelská smlouva ke každé službě</b><span class="sub">Písemně dané, co poskytovatel s daty smí a nesmí dělat.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Data neslouží k trénování AI</b><span class="sub">U firemních a vývojářských služeb je to smluvně vyloučené. Fotka z konference nezlepšuje žádný model.</span></li>
+        <li><b>Šifrované při přenosu i uložení</b><span class="sub">Standard u všech použitých služeb.</span></li>
+        <li><b>Žádný prodej ani předání dál</b><span class="sub">Data se nepředávají inzerentům ani nikomu třetímu.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Stejné nastavení běžně používá české bankovnictví, zdravotnictví i veřejná správa. Nevymýšlíme nic nového.</div>
+  <div class="pagenum">06</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 7 — SPOLEČNÁ PRAVIDLA -->
 <section class="slide">
   <div class="overline">Základ</div>
   <h1>Pět pravidel platných<br>pro všechny naše aplikace</h1>
@@ -288,11 +362,11 @@
     </div>
   </div>
   <div class="note">Nejlepší ochrana údajů je ta, kde žádné údaje nevzniknou. Celá architektura našich eventových aplikací je postavená přesně na tomhle.</div>
-  <div class="pagenum">05</div>
+  <div class="pagenum">07</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 6 — SELFIE JAK FUNGUJE -->
+<!-- 8 — SELFIE JAK FUNGUJE -->
 <section class="slide">
   <div class="overline">Selfie zeď · 1/3</div>
   <h1>Jak selfie zeď funguje</h1>
@@ -305,11 +379,11 @@
     <div class="step"><div class="n">4</div><p>Dostane hotový obrázek. Může si ho stáhnout do telefonu.</p></div>
   </div>
   <div class="note">Výsledkem je <b>kreslená stylizace</b>, ne realistická fotografie. Výstup je záměrně vedený tak, aby na první pohled vypadal jako ilustrace.</div>
-  <div class="pagenum">06</div>
+  <div class="pagenum">08</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 7 — SELFIE BEZPEČNOST -->
+<!-- 9 — SELFIE BEZPEČNOST -->
 <section class="slide">
   <div class="overline">Selfie zeď · 2/3</div>
   <h1>Proč je selfie zeď v pořádku</h1>
@@ -331,11 +405,11 @@
     </div>
   </div>
   <div class="note">Vzniká <b>umělecká podoba člověka</b>, ne biometrický záznam. Aplikace nikoho nerozpoznává a nikoho nedohledá — nic takového neumí a není k tomu postavená.</div>
-  <div class="pagenum">07</div>
+  <div class="pagenum">09</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 8 — SELFIE REFERENCE -->
+<!-- 10 — SELFIE REFERENCE -->
 <section class="slide">
   <div class="overline">Selfie zeď · 3/3</div>
   <h1>Kde už selfie zeď běžela</h1>
@@ -359,11 +433,11 @@
       <p>V zábavním parku Peklo Čertovina běží aplikace pro širokou veřejnost dlouhodobě, v denním provozu, včetně tisku fotek a řešení souhlasů.</p>
     </div>
   </div>
-  <div class="pagenum">08</div>
+  <div class="pagenum">10</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 9 — AVATAR JAK FUNGUJE -->
+<!-- 11 — AVATAR JAK FUNGUJE -->
 <section class="slide">
   <div class="overline">Digitální avatar · 1/3</div>
   <h1>Jak funguje Mark Meatman</h1>
@@ -384,11 +458,11 @@
     </div>
   </div>
   <div class="note">Rozhovory s Markem se neukládají a nikam se neposílají k dalšímu využití. Když od kiosku odejdete, konverzace končí a mizí.</div>
-  <div class="pagenum">09</div>
+  <div class="pagenum">11</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 10 — AVATAR PRÁVA -->
+<!-- 12 — AVATAR PRÁVA -->
 <section class="slide">
   <div class="overline">Digitální avatar · 2/3</div>
   <h1>Podoba, hlas a autorská práva</h1>
@@ -422,11 +496,11 @@
     </div>
   </div>
   <div class="note">Postup je stejný, jaký používáme u ŠKODA AUTO a HOCHTIEF. Za celou dobu jsme s ním neměli jediný spor ani stížnost.</div>
-  <div class="pagenum">10</div>
+  <div class="pagenum">12</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 11 — KAMERA -->
+<!-- 13 — KAMERA -->
 <section class="slide">
   <div class="overline">Digitální avatar · 3/3</div>
   <h1>Kamera u kiosku<br>nic nesbírá</h1>
@@ -447,11 +521,11 @@
     </div>
   </div>
   <div class="note">Právě proto celá věc funguje i offline — nemá totiž co posílat.</div>
-  <div class="pagenum">11</div>
+  <div class="pagenum">13</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 12 — AVATAR REFERENCE -->
+<!-- 14 — AVATAR REFERENCE -->
 <section class="slide">
   <div class="overline">Digitální avatar · reference</div>
   <h1>Pro koho už avatary stavíme</h1>
@@ -478,11 +552,11 @@
       <p>Avatar Stavomír pro HOCHTIEF a Puk pro hokejovou Síň slávy jsou postavené pro trvalý provoz bez obsluhy. Systémy jsou ověřené a stabilní.</p>
     </div>
   </div>
-  <div class="pagenum">12</div>
+  <div class="pagenum">14</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 13 — EVENTOVÁ APLIKACE -->
+<!-- 15 — EVENTOVÁ APLIKACE -->
 <section class="slide">
   <div class="overline">Eventová aplikace · 1/2</div>
   <h1>Aplikace konference,<br>kvízy a hlasování</h1>
@@ -503,11 +577,11 @@
     </div>
   </div>
   <div class="note">Do aplikace se nedá nic citlivého zadat, protože se na nic citlivého neptá.</div>
-  <div class="pagenum">13</div>
+  <div class="pagenum">15</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 14 — HLASOVÁNÍ -->
+<!-- 16 — HLASOVÁNÍ -->
 <section class="slide">
   <div class="overline">Eventová aplikace · 2/2</div>
   <h1>Hlasování o nejlepší špekáček</h1>
@@ -528,11 +602,11 @@
     </div>
   </div>
   <div class="note">Hlasování je anketa pro pobavení a zapojení sálu, ne volby. Zabezpečení odpovídá tomu, o co jde — a je dohodnuté se svazem.</div>
-  <div class="pagenum">14</div>
+  <div class="pagenum">16</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 15 — QR OBAVA -->
+<!-- 17 — QR OBAVA -->
 <section class="slide">
   <div class="overline">QR kódy · 1/2</div>
   <h1>QR kódy — čeho se lidé<br>oprávněně bojí</h1>
@@ -551,11 +625,11 @@
     </div>
   </div>
   <div class="note">Podvod s QR kódem má smysl jen tam, kde se posílají peníze. U programu konference, kvízu a fotky není z čeho profitovat.</div>
-  <div class="pagenum">15</div>
+  <div class="pagenum">17</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 16 — QR ŘEŠENÍ -->
+<!-- 18 — QR ŘEŠENÍ -->
 <section class="slide">
   <div class="overline">QR kódy · 2/2</div>
   <h1>Jak to na MEATINGu<br>bude konkrétně</h1>
@@ -588,11 +662,11 @@
     </div>
   </div>
   <div class="note">Doporučení pro pořadatele: před zahájením projít místa s kódy a zkontrolovat, že na nich není nic nalepeného. Stejná kontrola jako u bannerů a cedulí.</div>
-  <div class="pagenum">16</div>
+  <div class="pagenum">18</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 17 — AI ACT -->
+<!-- 19 — AI ACT -->
 <section class="slide">
   <div class="overline">Umělá inteligence a zákon</div>
   <h1>Označujeme, co vytvořila AI</h1>
@@ -613,11 +687,11 @@
     </div>
   </div>
   <div class="note">Otevřenost je tady výhoda, ne riziko. Lidé se nebojí toho, co jim vysvětlíte — bojí se toho, co před nimi schováváte.</div>
-  <div class="pagenum">17</div>
+  <div class="pagenum">19</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 18 — PROVOZ -->
+<!-- 20 — PROVOZ -->
 <section class="slide">
   <div class="overline">Provozní jistota</div>
   <h1>Co když něco přestane fungovat</h1>
@@ -638,11 +712,11 @@
     </div>
   </div>
   <div class="note">Tuhle sestavu jsme takhle postavili už na desítkách akcí. Postup je vyzkoušený, ne improvizovaný.</div>
-  <div class="pagenum">18</div>
+  <div class="pagenum">20</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 19 — SHRNUTÍ -->
+<!-- 21 — SHRNUTÍ -->
 <section class="slide">
   <div class="overline">Shrnutí</div>
   <h1>Šest vět na závěr</h1>
@@ -656,11 +730,11 @@
     <li><b>Vše, co vytvořila AI, je jako AI označené</b> — v souladu s evropskými pravidly platnými od srpna 2026.</li>
   </ul>
   <div class="note">Stejný přístup prošel schválením u Visy, ŠKODA AUTO i HOCHTIEFu. Není to výjimka udělaná pro tuhle akci — je to náš standard.</div>
-  <div class="pagenum">19</div>
+  <div class="pagenum">21</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
-<!-- 20 — KONTAKT -->
+<!-- 22 — KONTAKT -->
 <section class="slide">
   <div class="overline">Kontakt</div>
   <h1>Rádi odpovíme<br>na cokoli dalšího</h1>
@@ -678,7 +752,7 @@
       <p>20. října 2026 · OREA Congress Hotel Brno<br>16. ročník konference Českého svazu zpracovatelů masa</p>
     </div>
   </div>
-  <div class="pagenum">20</div>
+  <div class="pagenum">22</div>
   <img class="xmark" src="__XMARK__" alt="">
 </section>
 
