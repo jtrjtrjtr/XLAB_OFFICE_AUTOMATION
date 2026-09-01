@@ -4,7 +4,7 @@ Prezentace pro Český svaz zpracovatelů masa (kontakt Julius Maindl, MULTIVAC 
 Odpovídá na obavy svazu ohledně QR kódů, GDPR u selfie aplikace a bezpečnosti
 technologií nasazovaných na MEATING 2026 (20. 10. 2026, OREA Congress Hotel Brno).
 
-- Formát: 22 slajdů, na šířku, 16:9 (960 × 540 pt)
+- Formát: 24 slajdů, na šířku, 16:9 (960 × 540 pt)
 - Brand: XLAB WHITE theme (podle skillu `xlab-brand`)
 - Jazyk: čeština, srozumitelná i pro publikum, které s technologiemi nepracuje
 
@@ -14,6 +14,7 @@ technologií nasazovaných na MEATING 2026 (20. 10. 2026, OREA Congress Hotel Br
 |--------|-------|
 | `prezentace.html` | Zdroj. Obsahuje zástupné značky `__LOGO_BLACK__` a `__XMARK__` pro brandové assety. |
 | `XLAB_MEATING_2026_Bezpecnost.pdf` | Výstup k prezentování. |
+| `img/` | Ukázkové motivy selfie zdi vložené do slajdu 9 (base64 při buildu). |
 | `POZNAMKY_INTERNI.md` | **Neposílat klientovi.** Co v prezentaci vědomě není a proč. |
 
 ## Jak přegenerovat PDF
@@ -29,6 +30,10 @@ A = pathlib.Path("/tmp/xlab-assets")
 u = lambda p: "data:image/png;base64," + base64.b64encode((A/p).read_bytes()).decode()
 h = pathlib.Path("prezentace.html").read_text(encoding="utf-8")
 h = h.replace("__LOGO_BLACK__", u("x_logo_black.png")).replace("__XMARK__", u("x_symbol_black.png"))
+# obrázky ze složky img/ (jpeg)
+import base64 as b64
+for ph, f in [("__IMG_HERO__","img/meating_Hero.jpg"), ("__IMG_COMIC__","img/meating_Comic.jpg"), ("__IMG_KRK__","img/meating_Krkovicka.jpg")]:
+    h = h.replace(ph, "data:image/jpeg;base64," + b64.b64encode(pathlib.Path(f).read_bytes()).decode())
 pathlib.Path("build.html").write_text(h, encoding="utf-8")
 EOF
 

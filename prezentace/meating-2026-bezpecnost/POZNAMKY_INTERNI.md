@@ -10,7 +10,7 @@ V Notionu jsou doložené: **ŠKODA AUTO** (Laurin, muzeum + Autostadt Wolfsburg
 
 Nedoložené v Notionu, do prezentace zapsané podle zadání:
 **Ernst & Young, Deloitte, Wella, Decathlon, zdravotnictví (pilot)**.
-Před prezentací projít a případně vyškrtnout, co nemá oporu — jde o slajd 14.
+Před prezentací projít a případně vyškrtnout, co nemá oporu — jde o slajd 15.
 U selfie zdi jsou naopak všechny uvedené reference doložené
 (Visa, Wflow, ČSLH, 4FIN Kongres 2026, Peklo Čertovina, MULTIVAC/TVI).
 
@@ -19,7 +19,7 @@ U selfie zdi jsou naopak všechny uvedené reference doložené
 Zadání znělo „mažou se po 30 dnech“. V MEATING verzi selfie aplikace
 (`F:/Vibe-apps/multivac-meating-selfie/`) je ale **mazání podle stáří vypnuté**
 a zůstal jen strop na počet souborů (2000). Text souhlasu je proto psaný jako
-„uchování po dobu akce“, žádný slib 30 dnů. Slajd 9 říká „uchování jen po dobu akce,
+„uchování po dobu akce“, žádný slib 30 dnů. Slajd 10 říká „uchování jen po dobu akce,
 po skončení konference se mažou“ — což je pravda a zároveň víc, než slibuje souhlas.
 
 **Úkol:** před akcí buď zapnout automatické mazání s konkrétní lhůtou a slíbit ji
@@ -32,13 +32,13 @@ Pozor na past zapsanou v Notionu: `MAX_AGE_DAYS = 0` neznamená „nemazat“, a
 Fotka jde ke zpracování ke Googlu (Gemini + Drive). Původní text souhlasu tvrdil,
 že se údaje **nepředávají mimo EU** — v MEATING verzi opraveno.
 ⚠️ **Stejná chybná formulace je pořád v živé aplikaci Peklo Čertovina.** Opravit.
-Ve slajdu 9 je proto formulace „prověření dodavatelé, smluvní režim GDPR“,
+Ve slajdu 10 je proto formulace „prověření dodavatelé, smluvní režim GDPR“,
 ne „všechno zůstává v EU“.
 
 ## 4. Hlasování o špekáček — jeden telefon, jeden hlas
 
 Obejití druhým telefonem nebo anonymním oknem se **neřeší** — takhle to bylo
-odsouhlaseno se svazem 28. 8. Slajd 16 to podává jako přiměřené (je to anketa,
+odsouhlaseno se svazem 28. 8. Slajd 17 to podává jako přiměřené (je to anketa,
 ne volby) a přidává kontrolu součtů proti počtu účastníků před vyhlášením.
 Kdyby se někdo ptal víc, tohle je odpověď: dohodnuté řešení, ne opomenutí.
 
@@ -67,6 +67,27 @@ Vlastní pravidla pro přenos mimo EU má XLAB navíc v čl. 10.1 směrnice SM_G
 
 ## 6. Provozní tvrzení, která musí platit
 
-Slajd 20 slibuje technika na místě po celou dobu akce a vypnutí kteréhokoli prvku
+Slajd 21 slibuje technika na místě po celou dobu akce a vypnutí kteréhokoli prvku
 na dálku. Ověřit, že to sedí s nabídkou a rozpočtem (must have / optional, který
 Julius čeká od 27. 8.).
+
+## 7. Ukázkové obrázky na slajdu 9
+
+Tři motivy (Hrdina oboru, Komiks, Řezník Krkovička) jsou staženy z Drive složky
+`MEATING 2026 — Selfie Wall` (id 1QcBbuTeD_Rbt2EQIgumE9up8bHWVCoQ6), vznikly
+11.–24. 8. 2026 při vývoji aplikace, tedy před akcí a na tvářích našeho týmu.
+Uloženy zmenšené v `img/`.
+
+⚠️ **Do prezentace vědomě nešly reálné selfie z Visy, hokeje ani 4FIN**, přestože
+na Drive jsou. Jsou to výstupy skutečných návštěvníků a jejich použití k propagaci
+by bylo v rozporu se souhlasem, který ti lidé odklikli — a v prezentaci, která slibuje
+mazání fotek po akci, by to bylo obzvlášť nešťastné. Pokud chceš na slajd fotky
+z reálné akce (kiosek, LED stěna, lidé u zdi zezadu), pošli je a doplním je;
+záběry prostoru a instalace jsou bez problému.
+
+## 8. Odkazy použité na slajdu 23
+
+Ověřené: `xlab.cz/avatars` (z Notionu), `dataprivacyframework.gov`, GDPR 2016/679,
+AI Act 2024/1689. Sekce Privacy / Terms / Code of Conduct / Technical Background jsou
+uvedené názvem podle menu webu, ne přímou URL — přesné adresy jsem z tohoto prostředí
+nemohl ověřit (blokovaný egress). Než to půjde ven jako PDF s prokliky, projdi je.
