@@ -51,7 +51,17 @@ je jen u 27001. Pokud existuje certifikát i na ostatní, dá se doplnit.
 Slajd slibuje technika na místě po celou dobu akce a vypnutí kteréhokoli prvku na dálku.
 Ověřit, že to sedí s nabídkou a rozpočtem (must have / optional, který Julius čeká od 27. 8.).
 
-## 7. Ukázkové obrázky (slajd 7)
+## 7. Ukázkové obrázky a argument o deepfake (slajd 7)
+
+Slajd se jmenuje „Není to deepfake“ a nese argument: podoba se schválně nezachovává
+přesně, výstup je stylizovaný, deepfake je oproti tomu realistická fotka/video vydávané
+za skutečné.
+
+⚠️ **Chybí referenční vstupní fotografie** vedle výstupů. Klient ji chce vidět, aby bylo
+poznat, jak moc se podoba změnila. Nemám žádnou vstupní fotku — aplikace ukládá na Drive
+jen hotové obrázky. Stačí poslat jednu fotku (vlastní nebo od kolegy se souhlasem)
+a doplním layout „vstup → výstupy“.
+
 
 Čtyři motivy staženy z Drive složky `MEATING 2026 — Selfie Wall`
 (id 1QcBbuTeD_Rbt2EQIgumE9up8bHWVCoQ6), vzniklé 17.–24. 8. 2026 při vývoji, tedy po
