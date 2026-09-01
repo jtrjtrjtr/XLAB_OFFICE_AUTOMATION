@@ -11,16 +11,22 @@ Nedoložené, do prezentace zapsané podle zadání: **Ernst & Young, Deloitte, 
 Decathlon, zdravotnictví (pilot)**. Projít a případně vyškrtnout.
 U selfie zdi jsou všechny reference doložené.
 
-## 2. Retence fotek — ve slajdech úmyslně NENÍ „30 dní“ (slajd 6)
+## 2. 🔴 Retence fotek — slajdy 5 a 6 slibují TŘI DNY
 
-V MEATING verzi aplikace (`F:/Vibe-apps/multivac-meating-selfie/`) je **mazání podle
-stáří vypnuté**, zůstal jen strop na počet souborů (2000). Text souhlasu slibuje
-„uchování po dobu akce“, ne 30 dnů. Slajd říká „fotky se po akci mažou“ — je to pravda
-a zároveň víc, než slibuje souhlas.
+Podle zadání Sebastiana (1. 9.) je na slajdech napsáno: vstupní fotka se po vygenerování
+**okamžitě maže**, hotový stylizovaný obrázek se maže **po třech dnech, jak je uvedeno
+v podmínkách**.
 
-**Úkol:** před akcí buď zapnout automatické mazání s konkrétní lhůtou, nebo po akci
-složku ručně vyprázdnit a mít o tom záznam. Pozor: `MAX_AGE_DAYS = 0` neznamená
-„nemazat“, ale „smazat všechno“ — je na to pojistka `if (MAX_AGE_DAYS > 0)`.
+⚠️ **Tohle si musí někdo ověřit proti kódu, než to zazní před svazem.** V zápisu z 11. 8.
+stojí, že v MEATING verzi (`F:/Vibe-apps/multivac-meating-selfie/`) je **mazání podle
+stáří vypnuté** a zůstal jen strop na počet souborů (2000), a že text souhlasu slibuje
+„uchování po dobu akce“, žádnou konkrétní lhůtu. Pokud se od té doby nic nezměnilo,
+prezentace slibuje víc, než aplikace dělá — a je to slib o mazání osobních údajů,
+tedy přesně to, na co se svaz ptá.
+
+**Úkol před akcí:** zapnout automatické mazání po třech dnech a sladit s ním text
+souhlasu. Pozor: `MAX_AGE_DAYS = 0` neznamená „nemazat“, ale „smazat všechno“ —
+je na to pojistka `if (MAX_AGE_DAYS > 0)`.
 
 ## 3. Předání dat mimo EU (slajdy 4 a 6)
 
