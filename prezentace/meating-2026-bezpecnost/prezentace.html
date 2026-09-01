@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>MEATING 2026 — Bezpečnost technologií</title>
+<style>
+  @page { size: 338.667mm 190.5mm; margin: 0; }
+
+  :root{
+    --bg:#F8F7F2;
+    --ink:#1a1a1a;
+    --card:#EBEBEB;
+    --line:#E3E829;
+    --gray:#4a4a4a;
+    --gray2:#666666;
+    --rule:#d6d5cf;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html,body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'GT America','Helvetica Neue',Helvetica,Arial,sans-serif;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  .slide{
+    position:relative;
+    width:1280px; height:720px;
+    background:var(--bg);
+    padding:64px 84px 72px 84px;
+    page-break-after:always;
+    break-after:page;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .slide:last-child{ page-break-after:auto; break-after:auto; }
+
+  /* ---- header ---- */
+  .overline{
+    font-size:13px; font-weight:700; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--gray); margin-bottom:14px;
+  }
+  h1{
+    font-size:42px; line-height:1.1; font-weight:700;
+    text-transform:uppercase; letter-spacing:-0.005em;
+  }
+  .accent{ width:190px; height:4px; background:var(--line); margin:20px 0 30px 0; }
+
+  .lead{
+    font-size:20px; line-height:1.45; color:var(--gray);
+    max-width:1020px; margin-bottom:26px;
+  }
+
+  /* ---- footer ---- */
+  .pagenum{
+    position:absolute; left:84px; bottom:34px;
+    font-size:12px; color:var(--gray2); letter-spacing:.08em;
+  }
+  .xmark{
+    position:absolute; right:84px; bottom:30px;
+    width:62px; height:38.75px; opacity:.9;
+  }
+
+  /* ---- bullets ---- */
+  ul.b{ list-style:none; }
+  ul.b > li{
+    position:relative; padding-left:30px; margin-bottom:17px;
+    font-size:21px; line-height:1.42;
+  }
+  ul.b > li::before{
+    content:""; position:absolute; left:0; top:11px;
+    width:13px; height:3px; background:var(--line);
+  }
+  ul.b > li b{ font-weight:700; }
+  ul.b > li span.sub{
+    display:block; font-size:17px; line-height:1.4;
+    color:var(--gray2); margin-top:5px;
+  }
+  ul.b.tight > li{ margin-bottom:12px; font-size:19px; }
+
+  /* ---- two columns ---- */
+  .cols{ display:flex; gap:44px; flex:1; }
+  .col{ flex:1; min-width:0; }
+
+  /* ---- cards ---- */
+  .cards{ display:flex; gap:22px; flex:0 0 auto; align-items:stretch; }
+  .cards.g3 > .card{ flex:1; }
+  .card{
+    background:var(--card); padding:26px 26px 24px 26px;
+    border-top:4px solid var(--line); flex:1 1 0; min-width:0;
+  }
+  .card h3{
+    font-size:18px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--gray); margin-bottom:14px;
+  }
+  .card p{ font-size:17px; line-height:1.45; color:var(--ink); }
+  .card ul{ list-style:none; }
+  .card ul li{
+    position:relative; padding-left:18px; font-size:16.5px;
+    line-height:1.4; margin-bottom:10px;
+  }
+  .card ul li::before{
+    content:""; position:absolute; left:0; top:9px;
+    width:8px; height:2px; background:var(--gray);
+  }
+
+  /* ---- numbered steps ---- */
+  .steps{ display:flex; gap:18px; margin-top:6px; }
+  .step{ flex:1; background:var(--card); padding:22px 20px; border-top:4px solid var(--line); }
+  .step .n{
+    font-size:30px; font-weight:700; color:var(--gray); line-height:1; margin-bottom:12px;
+  }
+  .step p{ font-size:16.5px; line-height:1.4; }
+
+  /* ---- reference logos / names ---- */
+  .refgrid{ display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
+  .ref{
+    background:var(--card); padding:13px 20px; font-size:19px; font-weight:700;
+    letter-spacing:.02em; border-left:4px solid var(--line);
+  }
+  .ref.small{ font-size:16px; font-weight:400; padding:11px 16px; border-left-color:var(--rule); }
+
+  /* ---- comparison ---- */
+  .vs{ display:flex; gap:26px; flex:0 0 auto; align-items:stretch; }
+  .vsbox{ flex:1; padding:26px; background:var(--card); }
+  .vsbox.bad{ border-top:4px solid #b4b3ad; }
+  .vsbox.good{ border-top:4px solid var(--line); }
+  .vsbox h3{ font-size:19px; font-weight:700; margin-bottom:16px; text-transform:uppercase; letter-spacing:.04em; }
+  .vsbox p{ font-size:17px; line-height:1.45; margin-bottom:12px; }
+  .vsbox p:last-child{ margin-bottom:0; }
+
+  /* ---- cover ---- */
+  .cover{ justify-content:center; align-items:flex-start; padding-left:110px; }
+  .cover img.logo{ width:250px; margin-bottom:34px; }
+  .cover .rule{ width:260px; height:4px; background:var(--line); margin:0 0 34px 0; }
+  .cover h1{ font-size:56px; line-height:1.06; max-width:900px; }
+  .cover .sub{ font-size:24px; color:var(--gray); margin-top:26px; }
+  .cover .meta{ font-size:16px; color:var(--gray2); margin-top:46px; line-height:1.7; }
+
+  /* ---- closing ---- */
+  .big{ font-size:27px; line-height:1.45; max-width:1000px; }
+
+  .note{
+    margin-top:auto; font-size:15px; color:var(--gray2);
+    border-top:1px solid var(--rule); padding-top:14px; line-height:1.45;
+  }
+</style>
+</head>
+<body>
+
+<!-- 1 — COVER -->
+<section class="slide cover">
+  <img class="logo" src="__LOGO_BLACK__" alt="XLAB">
+  <div class="rule"></div>
+  <h1>Bezpečnost a ochrana<br>osobních údajů</h1>
+  <div class="sub">Interaktivní technologie pro MEATING 2026</div>
+  <div class="meta">
+    Připraveno pro Český svaz zpracovatelů masa a MULTIVAC / TVI<br>
+    XLAB s.r.o. · Výstaviště 67, Praha 7 · xlab.cz
+  </div>
+</section>
+
+<!-- 2 — O ČEM TO BUDE -->
+<section class="slide">
+  <div class="overline">Úvod</div>
+  <h1>O čem si dnes povíme</h1>
+  <div class="accent"></div>
+  <div class="lead">Konference bude mít několik technologických prvků. U každého vysvětlíme tři věci: <b>co to dělá</b>, <b>jaká data se tam objeví</b> a <b>proč je to bezpečné</b>.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Jak to máme podložené</b> — smlouvy, souhlasy, certifikace</li>
+        <li><b>Selfie zeď</b> — fotka v uměleckém stylu</li>
+        <li><b>Digitální avatar Mark Meatman</b> — mluvící průvodce</li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Eventová aplikace</b> — program, kvízy, hlasování</li>
+        <li><b>QR kódy</b> — na bannerech a cedulích</li>
+        <li><b>Označení obsahu vytvořeného AI</b> — nová evropská pravidla</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Zkráceně: na akci nevzniká žádná databáze osobních údajů. Nikdo se nikam neregistruje, nikdo nezadává jméno, adresu ani platební údaje.</div>
+  <div class="pagenum">02</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 3 — KDO JSME -->
+<section class="slide">
+  <div class="overline">Kdo to staví</div>
+  <h1>Nejsme v tom poprvé</h1>
+  <div class="accent"></div>
+  <div class="lead">Stejné technologie, jaké chystáme pro MEATING, už roky běží u velkých korporací, kde procházejí jejich vlastní právní a bezpečnostní kontrolou.</div>
+  <div class="cols">
+    <div class="col">
+      <div class="card">
+        <h3>Digitální avataři</h3>
+        <ul>
+          <li><b>ŠKODA AUTO</b> — avatar Laurin, muzeum a HR</li>
+          <li><b>HOCHTIEF</b> — avatar Stavomír, kiosek</li>
+          <li><b>Český svaz ledního hokeje</b> — Síň slávy</li>
+          <li>Ernst &amp; Young, Deloitte, Wella</li>
+          <li>Decathlon — ukázka v prodejně</li>
+          <li>Zdravotnictví — pilotní nasazení</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h3>Selfie zeď a eventové aplikace</h3>
+        <ul>
+          <li><b>Visa</b> — mezinárodní akce, korporátní schválení</li>
+          <li><b>Wflow</b> — firemní event</li>
+          <li><b>Český svaz ledního hokeje</b> — hokejová akce</li>
+          <li><b>4FIN Kongres 2026</b></li>
+          <li><b>Peklo Čertovina</b> — celosezónní provoz pro veřejnost</li>
+          <li><b>MULTIVAC / TVI</b> — MEATING 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="note">Visa je globální finanční korporace s jedním z nejpřísnějších režimů pro ochranu dat. Naši selfie aplikaci u nich schválili a nasadili. Totéž platí pro ŠKODA AUTO a HOCHTIEF u avatarů.</div>
+  <div class="pagenum">03</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 4 — CERTIFIKACE -->
+<section class="slide">
+  <div class="overline">Doklady</div>
+  <h1>Co k tomu máme na papíře</h1>
+  <div class="accent"></div>
+  <div class="cards g3">
+    <div class="card">
+      <h3>Ochrana údajů</h3>
+      <ul>
+        <li>Zpracování dle GDPR</li>
+        <li>Zpracovatelské smlouvy s klientem</li>
+        <li>Písemné souhlasy tam, kde se pracuje s podobou nebo hlasem konkrétního člověka</li>
+        <li>Vzory prošly kontrolou právníka</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Umělá inteligence</h3>
+      <ul>
+        <li>Evropský AI Act, článek 50 — účinný od 2. 8. 2026</li>
+        <li>Vše, co vytvoří AI, je jako AI viditelně označené</li>
+        <li>Avatar se sám představí jako umělá inteligence</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Autorská práva</h3>
+      <ul>
+        <li>Hlas i podoba jen s podepsaným souhlasem</li>
+        <li>Trojstranná smlouva: mluvčí — objednatel — XLAB</li>
+        <li>Souhlas je kdykoli odvolatelný</li>
+        <li>Licencovaný software a obsah</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Firemní údaje, certifikace a reference: <b>xlab.cz</b> · Kompletní seznam dokladů předáváme na vyžádání do dokumentace akce.</div>
+  <div class="pagenum">04</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 5 — SPOLEČNÁ PRAVIDLA -->
+<section class="slide">
+  <div class="overline">Základ</div>
+  <h1>Pět pravidel platných<br>pro všechny naše aplikace</h1>
+  <div class="accent"></div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Žádné účty, žádné přihlašování</b><span class="sub">Účastník nikde nezadává jméno, e-mail, telefon ani heslo.</span></li>
+        <li><b>Žádné citlivé údaje</b><span class="sub">Nesbíráme rodná čísla, adresy, platební údaje ani zdravotní informace.</span></li>
+        <li><b>Sbíráme jen to nezbytné</b><span class="sub">Co aplikace k funkci nepotřebuje, to se vůbec neukládá.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Data mají konec</b><span class="sub">Obsah z akce se po jejím skončení maže. Nic se nearchivuje „pro jistotu“.</span></li>
+        <li><b>Nic se neprodává dál</b><span class="sub">Žádná data z akce nepředáváme inzerentům ani třetím stranám.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Nejlepší ochrana údajů je ta, kde žádné údaje nevzniknou. Celá architektura našich eventových aplikací je postavená přesně na tomhle.</div>
+  <div class="pagenum">05</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 6 — SELFIE JAK FUNGUJE -->
+<section class="slide">
+  <div class="overline">Selfie zeď · 1/3</div>
+  <h1>Jak selfie zeď funguje</h1>
+  <div class="accent"></div>
+  <div class="lead">Účastník si vyfotí sebe a aplikace z jeho fotky vytvoří kreslený portrét v jednom z motivů konference — například „Hrdina oboru“ nebo „Mistr řemesla“.</div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><p>Načte QR kód u selfie zdi. Nic se neinstaluje, otevře se webová stránka.</p></div>
+    <div class="step"><div class="n">2</div><p>Přečte a odklikne souhlas. Bez souhlasu se nic dál neděje.</p></div>
+    <div class="step"><div class="n">3</div><p>Vyfotí se a vybere motiv.</p></div>
+    <div class="step"><div class="n">4</div><p>Dostane hotový obrázek. Může si ho stáhnout do telefonu.</p></div>
+  </div>
+  <div class="note">Výsledkem je <b>kreslená stylizace</b>, ne realistická fotografie. Výstup je záměrně vedený tak, aby na první pohled vypadal jako ilustrace.</div>
+  <div class="pagenum">06</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 7 — SELFIE BEZPEČNOST -->
+<section class="slide">
+  <div class="overline">Selfie zeď · 2/3</div>
+  <h1>Proč je selfie zeď v pořádku</h1>
+  <div class="accent"></div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Dobrovolné a s výslovným souhlasem</b><span class="sub">Účastník se rozhodne sám. Kdo se fotit nechce, k aplikaci se vůbec nedostane.</span></li>
+        <li><b>Žádná identifikace osob</b><span class="sub">Aplikace nepoznává, kdo na fotce je. Nemá databázi tváří ani je s ničím neporovnává.</span></li>
+        <li><b>Fotka není nikam navázaná</b><span class="sub">U obrázku není jméno, e-mail ani telefon. Není z čeho určit, kdo to je.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Uchování jen po dobu akce</b><span class="sub">Fotky se po skončení konference mažou. Souhlas říká přesně to, co aplikace opravdu dělá.</span></li>
+        <li><b>Prověření dodavatelé, smluvní režim GDPR</b><span class="sub">Zpracování probíhá u velkých poskytovatelů, se kterými máme uzavřené zpracovatelské podmínky.</span></li>
+        <li><b>Obsah je hlídaný</b><span class="sub">Pevná pravidla zakazují nevhodné motivy. Na oborové akci z aplikace nemůže vyjet nic nemístného.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Vzniká <b>umělecká podoba člověka</b>, ne biometrický záznam. Aplikace nikoho nerozpoznává a nikoho nedohledá — nic takového neumí a není k tomu postavená.</div>
+  <div class="pagenum">07</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 8 — SELFIE REFERENCE -->
+<section class="slide">
+  <div class="overline">Selfie zeď · 3/3</div>
+  <h1>Kde už selfie zeď běžela</h1>
+  <div class="accent"></div>
+  <div class="lead">Není to prototyp. Je to náš odladěný produkt, který za poslední rok prošel korporátním i veřejným provozem.</div>
+  <div class="refgrid">
+    <div class="ref">VISA</div>
+    <div class="ref">WFLOW</div>
+    <div class="ref">ČESKÝ SVAZ LEDNÍHO HOKEJE</div>
+    <div class="ref">4FIN KONGRES 2026</div>
+    <div class="ref">PEKLO ČERTOVINA</div>
+    <div class="ref">MULTIVAC / TVI</div>
+  </div>
+  <div class="cards" style="margin-top:34px;">
+    <div class="card">
+      <h3>Co to znamená</h3>
+      <p>U Visy prošla aplikace schválením korporátu, který patří k nejpřísnějším na světě, co se týče nakládání s daty. Nasazení proběhlo bez jediné výhrady.</p>
+    </div>
+    <div class="card">
+      <h3>Provozní zkušenost</h3>
+      <p>V zábavním parku Peklo Čertovina běží aplikace pro širokou veřejnost dlouhodobě, v denním provozu, včetně tisku fotek a řešení souhlasů.</p>
+    </div>
+  </div>
+  <div class="pagenum">08</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 9 — AVATAR JAK FUNGUJE -->
+<section class="slide">
+  <div class="overline">Digitální avatar · 1/3</div>
+  <h1>Jak funguje Mark Meatman</h1>
+  <div class="accent"></div>
+  <div class="lead">Mark je digitální postava na obrazovce. Umí mluvit, odpovídat na dotazy o oboru a provést účastníka programem konference.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Běží na našem počítači na místě</b><span class="sub">Kiosek stojí v sále. Videa i znalosti má u sebe na disku.</span></li>
+        <li><b>Zná obor, ne lidi</b><span class="sub">Jeho znalosti jsou odborné knihy o řeznickém řemesle a program konference. Žádné údaje o účastnících.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Funguje i bez internetu</b><span class="sub">Když vypadne připojení, přepne se do záložního režimu a mluví dál z toho, co má u sebe.</span></li>
+        <li><b>Má pevné mantinely</b><span class="sub">Sedmnáct pravidel určuje, o čem smí a nesmí mluvit. Respektuje i antimonopolní pravidlo svazu — o cenách a trhu nemluví.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Rozhovory s Markem se neukládají a nikam se neposílají k dalšímu využití. Když od kiosku odejdete, konverzace končí a mizí.</div>
+  <div class="pagenum">09</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 10 — AVATAR PRÁVA -->
+<section class="slide">
+  <div class="overline">Digitální avatar · 2/3</div>
+  <h1>Podoba, hlas a autorská práva</h1>
+  <div class="accent"></div>
+  <div class="lead">Tohle je oblast, kde nespoléháme na dobrou vůli. Máme na to smlouvy a bez podpisu se nezačíná pracovat.</div>
+  <div class="cards g3">
+    <div class="card">
+      <h3>Podoba</h3>
+      <ul>
+        <li>Mark je vymyšlená postava, ne skutečný člověk</li>
+        <li>Pokud se použije podoba konkrétní osoby, vždy s podepsaným souhlasem</li>
+        <li>Souhlas platí jen pro dohodnuté použití</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Hlas</h3>
+      <ul>
+        <li>Hlas se nahrává se souhlasem mluvčího</li>
+        <li>Trojstranná smlouva mluvčí — objednatel — XLAB</li>
+        <li>Prošla kontrolou právníka</li>
+        <li>Mluvčí může souhlas odvolat</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Označení AI</h3>
+      <ul>
+        <li>Mark vystupuje otevřeně jako umělá inteligence</li>
+        <li>Řekne to sám hned v úvodu</li>
+        <li>Splňuje článek 50 evropského AI Actu</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Postup je stejný, jaký používáme u ŠKODA AUTO a HOCHTIEF. Za celou dobu jsme s ním neměli jediný spor ani stížnost.</div>
+  <div class="pagenum">10</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 11 — KAMERA -->
+<section class="slide">
+  <div class="overline">Digitální avatar · 3/3</div>
+  <h1>Kamera u kiosku<br>nic nesbírá</h1>
+  <div class="accent"></div>
+  <div class="lead">Nejčastější obava. Odpověď je jednoduchá: kamera slouží jen k tomu, aby avatar poznal, že před ním někdo stojí.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Žádný snímek se neukládá</b><span class="sub">Obraz se vyhodnotí okamžitě a zahodí. Na disk se nezapisuje nic. Není to nastavení, je to pevná podmínka systému.</span></li>
+        <li><b>Nikam se nic neodesílá</b><span class="sub">Vyhodnocení běží přímo v počítači kiosku. Žádný obraz neopouští sál.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Nepozná, kdo jste</b><span class="sub">Systém rozezná, že tam někdo je. Nemá databázi tváří a nikoho neidentifikuje.</span></li>
+        <li><b>Nikdy nekomentuje vzhled</b><span class="sub">Tvrdé pravidlo: avatar nikdy neřekne, jak host vypadá, ani že ho vidí.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Právě proto celá věc funguje i offline — nemá totiž co posílat.</div>
+  <div class="pagenum">11</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 12 — AVATAR REFERENCE -->
+<section class="slide">
+  <div class="overline">Digitální avatar · reference</div>
+  <h1>Pro koho už avatary stavíme</h1>
+  <div class="accent"></div>
+  <div class="refgrid">
+    <div class="ref">ŠKODA AUTO</div>
+    <div class="ref">HOCHTIEF</div>
+    <div class="ref">ERNST &amp; YOUNG</div>
+    <div class="ref">DELOITTE</div>
+    <div class="ref">WELLA</div>
+    <div class="ref">DECATHLON</div>
+    <div class="ref">ČESKÝ SVAZ LEDNÍHO HOKEJE</div>
+    <div class="ref small">Autostadt Wolfsburg</div>
+    <div class="ref small">Zdravotnictví — pilot</div>
+    <div class="ref small">MULTIVAC / TVI</div>
+  </div>
+  <div class="cards" style="margin-top:34px;">
+    <div class="card">
+      <h3>Muzea a firemní prostory</h3>
+      <p>Avatar Laurin běží v muzeu ŠKODA AUTO a v Autostadtu ve Wolfsburgu — tedy v prostoru s tisíci návštěvníky denně, ve třech jazycích.</p>
+    </div>
+    <div class="card">
+      <h3>Veřejný prostor</h3>
+      <p>Avatar Stavomír pro HOCHTIEF a Puk pro hokejovou Síň slávy jsou postavené pro trvalý provoz bez obsluhy. Systémy jsou ověřené a stabilní.</p>
+    </div>
+  </div>
+  <div class="pagenum">12</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 13 — EVENTOVÁ APLIKACE -->
+<section class="slide">
+  <div class="overline">Eventová aplikace · 1/2</div>
+  <h1>Aplikace konference,<br>kvízy a hlasování</h1>
+  <div class="accent"></div>
+  <div class="lead">Aplikace nahrazuje tištěnou knížku, kterou svaz účastníkům dosud dával. Program, partneři, kvízy a hlasování o nejlepší špekáček na jednom místě.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Nic se neinstaluje</b><span class="sub">Otevře se jako webová stránka v prohlížeči telefonu.</span></li>
+        <li><b>Žádná registrace</b><span class="sub">Účastník nezadává jméno ani kontakt. Aplikace neví, kdo ji používá.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Výsledky kvízu zůstávají v telefonu</b><span class="sub">Uloží se v paměti prohlížeče účastníka, ne na náš server. Nikdo jiný je nevidí.</span></li>
+        <li><b>Hlasování je anonymní</b><span class="sub">Vzorky jsou jen pod čísly. Ukládá se číslo vzorku, ne kdo hlasoval.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Do aplikace se nedá nic citlivého zadat, protože se na nic citlivého neptá.</div>
+  <div class="pagenum">13</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 14 — HLASOVÁNÍ -->
+<section class="slide">
+  <div class="overline">Eventová aplikace · 2/2</div>
+  <h1>Hlasování o nejlepší špekáček</h1>
+  <div class="accent"></div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Jeden telefon — jeden hlas</b><span class="sub">Aplikace si v telefonu poznamená, že už bylo hlasováno.</span></li>
+        <li><b>Potvrzení před odesláním</b><span class="sub">„Opravdu chcete dát hlas číslu X? Znovu už hlasovat nepůjde.“</span></li>
+        <li><b>Vzorky jen pod čísly</b><span class="sub">Hlasující nevidí, čí výrobek hodnotí. Chrání to soutěž i výrobce.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Průběžné pořadí se nikdy neukazuje</b><span class="sub">Aby výsledky neovlivnily další hlasující. Zobrazí se jen počet hlasujících.</span></li>
+        <li><b>Kontrola na konci</b><span class="sub">Součty se před vyhlášením porovnají s počtem účastníků. Výsledek schvaluje pořadatel, ne aplikace.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Hlasování je anketa pro pobavení a zapojení sálu, ne volby. Zabezpečení odpovídá tomu, o co jde — a je dohodnuté se svazem.</div>
+  <div class="pagenum">14</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 15 — QR OBAVA -->
+<section class="slide">
+  <div class="overline">QR kódy · 1/2</div>
+  <h1>QR kódy — čeho se lidé<br>oprávněně bojí</h1>
+  <div class="accent"></div>
+  <div class="lead">Obava je legitimní a míří na skutečný problém. Jenže ten se týká jiné situace, než je naše.</div>
+  <div class="vs">
+    <div class="vsbox bad">
+      <h3>Kde problém opravdu je</h3>
+      <p><b>Nálepka na stole v restauraci.</b> Papírovou samolepku s QR kódem k platbě může kdokoli přelepit vlastní. Host pak platí podvodníkovi.</p>
+      <p>Funguje to proto, že: kód je <b>samolepka</b>, vede k <b>platbě</b>, nikdo ho <b>nehlídá</b> a host <b>nevidí</b>, kam ho to zavedlo.</p>
+    </div>
+    <div class="vsbox good">
+      <h3>Jak to máme my</h3>
+      <p><b>Kódy jsou vytištěné přímo v grafice</b> bannerů a cedulí, nebo svítí na digitální obrazovce. Nejde je přelepit, aniž by to bylo okamžitě vidět.</p>
+      <p><b>Nikde se neplatí.</b> Naše aplikace nemají platební bránu. Není co ukrást — ani kartu, ani heslo, protože žádné nezadáváte.</p>
+    </div>
+  </div>
+  <div class="note">Podvod s QR kódem má smysl jen tam, kde se posílají peníze. U programu konference, kvízu a fotky není z čeho profitovat.</div>
+  <div class="pagenum">15</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 16 — QR ŘEŠENÍ -->
+<section class="slide">
+  <div class="overline">QR kódy · 2/2</div>
+  <h1>Jak to na MEATINGu<br>bude konkrétně</h1>
+  <div class="accent"></div>
+  <div class="cards g3">
+    <div class="card">
+      <h3>Tři druhy kódů</h3>
+      <ul>
+        <li><b>Selfie</b> — jen na selfie zdi</li>
+        <li><b>Špekáček</b> — jen u degustačního stolu</li>
+        <li><b>Aplikace</b> — všude jinde, vede na úvodní stránku</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Proč to nejde zneužít</h3>
+      <ul>
+        <li>Kódy jsou součástí tištěné grafiky a digitálních cedulí</li>
+        <li>Vedou výhradně na naše ověřené adresy</li>
+        <li>Spojení je šifrované (https)</li>
+        <li>Adresa je vidět v telefonu ještě před otevřením</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Když by přesto něco</h3>
+      <ul>
+        <li>Kterýkoli prvek umíme vypnout během chvíle, na dálku</li>
+        <li>Provoz sledujeme po celou dobu akce</li>
+        <li>Na místě je náš technik</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Doporučení pro pořadatele: před zahájením projít místa s kódy a zkontrolovat, že na nich není nic nalepeného. Stejná kontrola jako u bannerů a cedulí.</div>
+  <div class="pagenum">16</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 17 — AI ACT -->
+<section class="slide">
+  <div class="overline">Umělá inteligence a zákon</div>
+  <h1>Označujeme, co vytvořila AI</h1>
+  <div class="accent"></div>
+  <div class="lead">Evropská unie od <b>2. srpna 2026</b> vyžaduje, aby bylo zřejmé, že obsah vytvořila umělá inteligence. My to splňujeme — a byli jsme na to připraveni dřív, než to začalo platit.</div>
+  <div class="cols">
+    <div class="col">
+      <ul class="b">
+        <li><b>Avatar to řekne sám</b><span class="sub">Mark se představí jako digitální postava vytvořená umělou inteligencí. Nikoho neuvádíme v omyl.</span></li>
+        <li><b>Selfie zeď to má v souhlasu</b><span class="sub">Účastník ví předem, že výsledkem je obrázek vytvořený umělou inteligencí.</span></li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="b">
+        <li><b>Označení je i na výstupu</b><span class="sub">Obrázky ze selfie zdi nesou brandový rámeček akce a stylizaci, která je jasně odlišuje od skutečné fotografie.</span></li>
+        <li><b>Rozhodl o tom klient, my to jen držíme</b><span class="sub">MULTIVAC i TVI potvrdily otevřený přístup: „Vytvořen umělou inteligencí.“</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note">Otevřenost je tady výhoda, ne riziko. Lidé se nebojí toho, co jim vysvětlíte — bojí se toho, co před nimi schováváte.</div>
+  <div class="pagenum">17</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 18 — PROVOZ -->
+<section class="slide">
+  <div class="overline">Provozní jistota</div>
+  <h1>Co když něco přestane fungovat</h1>
+  <div class="accent"></div>
+  <div class="lead">Konference se koná jednou za rok a nedá se opakovat. Proto počítáme s tím, že něco selže, a máme na to připravenou odpověď.</div>
+  <div class="cards g3">
+    <div class="card">
+      <h3>Výpadek internetu</h3>
+      <p>Avatar běží dál z lokálního počítače. Přepne se do náhradního režimu — program, orientaci a kvíz odpoví z toho, co má u sebe, ve zbytku slušně odkáže na obsluhu.</p>
+    </div>
+    <div class="card">
+      <h3>Problém s aplikací</h3>
+      <p>Každý prvek se dá vypnout samostatně, na dálku, během chvíle. Vypnutí jednoho neshodí ostatní.</p>
+    </div>
+    <div class="card">
+      <h3>Podpora na místě</h3>
+      <p>Po celou dobu akce je v sále náš technik. Vše je předem otestované na místě, ne až ráno v den akce.</p>
+    </div>
+  </div>
+  <div class="note">Tuhle sestavu jsme takhle postavili už na desítkách akcí. Postup je vyzkoušený, ne improvizovaný.</div>
+  <div class="pagenum">18</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 19 — SHRNUTÍ -->
+<section class="slide">
+  <div class="overline">Shrnutí</div>
+  <h1>Šest vět na závěr</h1>
+  <div class="accent"></div>
+  <ul class="b tight" style="margin-top:6px;">
+    <li><b>Nikdo se nikam neregistruje.</b> Na akci nevzniká žádná databáze osobních údajů.</li>
+    <li><b>QR kódy jsou vytištěné v grafice a nevedou k žádné platbě.</b> Riziko z restaurací se tu nemá kde uplatnit.</li>
+    <li><b>Selfie zeď vytváří uměleckou podobu, ne biometrický záznam.</b> Nikoho nepoznává a nikoho nedohledá.</li>
+    <li><b>Fotky se po akci mažou</b> a nepředávají se nikomu dalšímu.</li>
+    <li><b>Kamera u avatara nic neukládá ani neodesílá.</b> Vyhodnotí obraz na místě a zahodí ho.</li>
+    <li><b>Vše, co vytvořila AI, je jako AI označené</b> — v souladu s evropskými pravidly platnými od srpna 2026.</li>
+  </ul>
+  <div class="note">Stejný přístup prošel schválením u Visy, ŠKODA AUTO i HOCHTIEFu. Není to výjimka udělaná pro tuhle akci — je to náš standard.</div>
+  <div class="pagenum">19</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+<!-- 20 — KONTAKT -->
+<section class="slide">
+  <div class="overline">Kontakt</div>
+  <h1>Rádi odpovíme<br>na cokoli dalšího</h1>
+  <div class="accent"></div>
+  <div class="big" style="margin-bottom:auto;">
+    Kteroukoli část umíme ukázat naživo, projít řádek po řádku text souhlasu, nebo doložit smlouvy a doklady do dokumentace akce.
+  </div>
+  <div class="cards" style="flex:0;">
+    <div class="card">
+      <h3>XLAB s.r.o.</h3>
+      <p>Výstaviště 67, 170 00 Praha 7<br>xlab.cz</p>
+    </div>
+    <div class="card">
+      <h3>MEATING 2026</h3>
+      <p>20. října 2026 · OREA Congress Hotel Brno<br>16. ročník konference Českého svazu zpracovatelů masa</p>
+    </div>
+  </div>
+  <div class="pagenum">20</div>
+  <img class="xmark" src="__XMARK__" alt="">
+</section>
+
+</body>
+</html>
