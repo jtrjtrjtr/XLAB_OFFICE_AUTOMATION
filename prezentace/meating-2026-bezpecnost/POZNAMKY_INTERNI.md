@@ -42,23 +42,28 @@ odsouhlaseno se svazem 28. 8. Slajd 16 to podává jako přiměřené (je to ank
 ne volby) a přidává kontrolu součtů proti počtu účastníků před vyhlášením.
 Kdyby se někdo ptal víc, tohle je odpověď: dohodnuté řešení, ne opomenutí.
 
-## 5. Certifikace na webu
+## 5. Certifikace — doplněno, jeden detail k hlídání
 
-Web `xlab.cz` nebyl z tohoto prostředí dostupný (blokovaný egress), takže
-**konkrétní certifikáty a jejich odkazy nejsou v prezentaci vypsané** — nechtěl
-jsem si je vymýšlet. Slajd 4 stojí na tom, co je doložitelné (GDPR, AI Act čl. 50,
-smlouvy po právní kontrole) a odkazuje obecně na xlab.cz.
+Slajd 4 je vyplněný z webu xlab.cz, etického kodexu a interní směrnice SM_GDPR_1:
+ISO/IEC 27001, ISO/IEC 27701, EN ISO 9001, Výbor kybernetické bezpečnosti, interní
+auditor, směrnice ochrany osobních údajů účinná od 1. 3. 2021, kontakt gdpr@xlab.cz,
+mlčenlivost z VOP (čl. Mlčenlivost a ochrana důvěrných informací), povinnost vypořádat
+práva třetích stran (VOP, „Souhlas s užitím“).
 
-**Úkol před prezentací:** doplnit do slajdu 4 konkrétní názvy certifikací XLABu a přímé
-odkazy z webu. V HTML je to sekce `<!-- 4 — CERTIFIKACE -->`, stačí přidat
-odrážky do karty „Ochrana údajů“ a upravit poslední řádek `.note`.
+⚠️ Web říká doslova „designed in line with ISO 27001 and ISO27701“, ale zároveň
+„According to Certification ISO27001, XLAB is committed to…“ — u **27001** je tedy
+certifikace, u **27701** a **9001** je to soulad s normou. Slajd to tak i formuluje:
+„ISO/IEC 27001 — certifikované řízení bezpečnosti informací“, u zbylých dvou jen název
+normy bez slova certifikace. Kdyby se někdo doptal, tohle je přesná odpověď.
+Pokud existuje i certifikát na 9001 nebo 27701, dá se slovo doplnit.
 
-Certifikace **poskytovatelů technologií** (slajdy 5–6) v prezentaci naopak jsou a jsou ověřené:
-ISO/IEC 27001 / 27017 / 27018 / 27701 a SOC 2 Type II. Záměrně tam nejsou jména konkrétních
-služeb — mluví se o „velkých amerických poskytovatelích“. U EU–USA Data Privacy Framework je
-formulace obecná („certifikovaní poskytovatelé“), protože ne každý z použitých poskytovatelů
-je v seznamu DPF; u těch ostatních stojí přenos na standardních smluvních doložkách. Obojí je
-podle GDPR plnohodnotný právní titul, takže tvrzení na slajdu platí tak jako tak.
+Certifikace **poskytovatelů technologií** (slajdy 5–6) jsou ověřené: ISO/IEC 27001 /
+27017 / 27018 / 27701 a SOC 2 Type II. Záměrně tam nejsou jména konkrétních služeb —
+mluví se o „velkých amerických poskytovatelích“. U EU–USA Data Privacy Framework je
+formulace obecná („certifikovaní poskytovatelé“), protože ne každý z použitých
+poskytovatelů je v seznamu DPF; u těch ostatních stojí přenos na standardních smluvních
+doložkách. Obojí je podle GDPR plnohodnotný právní titul, takže tvrzení platí tak jako tak.
+Vlastní pravidla pro přenos mimo EU má XLAB navíc v čl. 10.1 směrnice SM_GDPR_1.
 
 ## 6. Provozní tvrzení, která musí platit
 

@@ -46,6 +46,10 @@ Rozměr stránky drží `@page { size: 338.667mm 190.5mm; }` v CSS.
 - Notion: `MEATING Selfie Wall — demo postaveno a nasazeno` — retence fotek, text souhlasu, obsahová pravidla
 - Notion: `Avatar Laurin — vazby a návaznosti`, kap. 8 Kamera — kamera neukládá ani neodesílá snímky
 - Notion: `MEATING 2026 — kiosek Marka v1 hotový a otestovaný` — offline/záložní režim, 17 guardrailů
+- xlab.cz — sekce Privacy (ISO 27001 / ISO 27701, GDPR, gdpr@xlab.cz) a Code of Conduct (EN ISO 9001)
+- Interní směrnice `SM_GDPR_1 Politika ochrany osobních údajů` v1, účinnost 1. 3. 2021 —
+  Výbor kybernetické bezpečnosti, interní audity, čl. 10.1 přenos údajů mimo EU
+- `VOP` (9. 4. 2021) — mlčenlivost a ochrana důvěrných informací, vypořádání práv třetích stran
 - Certifikace poskytovatelů (slajdy 5–6) ověřeno u zdroje: ISO/IEC 27001 / 27017 / 27018 / 27701
   a SOC 2 Type II u Google i OpenAI; EU–USA Data Privacy Framework (rozhodnutí Evropské komise,
   červenec 2023); data z firemních a API služeb se standardně nepoužívají k trénování modelů.
