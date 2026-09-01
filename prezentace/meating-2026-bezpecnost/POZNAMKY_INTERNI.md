@@ -63,7 +63,15 @@ jen hotové obrázky. Stačí poslat jednu fotku (vlastní nebo od kolegy se sou
 a doplním layout „vstup → výstupy“.
 
 
-Čtyři motivy staženy z Drive složky `MEATING 2026 — Selfie Wall`
+⚠️ **Motiv Řezník Krkovička ze slajdu vyřazen.** Všechny rendery na Drive (12.–24. 8.)
+jsou loutková varianta. Podle deníku z 18. 8. je motiv **neuzavřený spor**: klient chce
+hosty tlusté, plešaté a zrzavé jako v předloze, my jsme poslali věcný argument proti
+a nabídku střední cesty; Sebastian navíc nabídl, že Krkovičku může nahradit Hrdina
+(kategorie mají zůstat čtyři kvůli sudému počtu). Do prezentace pro svaz proto nešel —
+ukazovat motiv, který klient odmítl, by v jednání o bezpečnosti otevřelo úplně jinou
+debatu. Až bude schválená verze, doplní se zpět jako čtvrtá dlaždice.
+
+Tři motivy staženy z Drive složky `MEATING 2026 — Selfie Wall`
 (id 1QcBbuTeD_Rbt2EQIgumE9up8bHWVCoQ6), vzniklé 17.–24. 8. 2026 při vývoji, tedy po
 přestylizování motivů do kresby a na tvářích našeho týmu. Starší snímek z 13. 8.
 (motiv Hrdina, před přestylizováním) byl vyřazen.
